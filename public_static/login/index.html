@@ -1,14 +1,25 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<title>LOGIN</title>
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Business Login Form a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-<title>Login Form</title>
-<script src="jquery.js"></script>
-
-<script src="script.js"></script>
-
-
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="https://cbih.org/assets/plugins/bootstrap/css/bootstrap.min.css"/>
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+   
+	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<link rel="stylesheet" href="https://cbih.org/assets/plugins/bootstrap/css/bootstrap.min.css"/>
     <!-- FontAwesome -->
 	<link rel="stylesheet" href="https://cbih.org/assets/plugins/fontawesome/css/font-awesome.min.css"/>
     <!-- Animate -->
@@ -24,9 +35,15 @@
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans" rel="stylesheet">
     <!-- Main stylesheet -->
 	<link rel="stylesheet" href="https://cbih.org/assets/css/style.min.css" />
-    
+
+	
+	
+	<link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	
+	
+</head>
 <body>
-        <header>
+		<header>
                 <div id="pre_header">
                     <div class="container">
                         <div class="row">
@@ -58,28 +75,45 @@
                     </div>
                 </nav>
             </header>	
-   
-	
-	
-    <div class="loginbox">
-    <img src="avatar.png" class="avatar">
-        <h1>Login Here</h1>
-       
-           
-            <p>Username</p>
-            <input type="text" name="" id="username" placeholder="Enter Username">
-            <p>Password</p>
-            <input type="password" name="" id="password" placeholder="Enter Password">
-            <input type="submit" name="" id="submit" value="Login">
-    
-            <a href="#">Lost your password?</a><br>
-            <a href="/signup/index.html">Don't have an account?</a>
-        
-    <h6 class="text-danger" id="status" style="display:none">Invalid Username/Password</h6>
-        
-    </div>
-    <!-- <h3 id="status"></h3> -->
 
+<div class="signupform">
+	<div class="container">
+	
+		<div class="agile_info">
+			<div class="w3l_form">
+				<div class="left_grid_info">
+					<h1>Manage Your Account</h1>
+					
+					<img src="images/image.jpg" alt="" />
+				</div>
+			</div>
+			<div class="w3_info">
+				<h2>Login to your Account</h2>
+				<p>Enter your details to login.</p>
+				<form action="#" method="post">
+					<label>Email Address</label>
+					<div class="input-group">
+						<span class="fa fa-envelope" aria-hidden="true"></span>
+						<input type="email" placeholder="Enter Your Email" required=""> 
+					</div>
+					<label>Password</label>
+					<div class="input-group">
+						<span class="fa fa-lock" aria-hidden="true"></span>
+						<input type="Password" placeholder="Enter Password" required="">
+					</div> 
+					<div class="login-check">
+						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Remember me</label>
+					</div>						
+						<button class="btn btn-danger btn-block" type="submit">Login</button >                
+				</form>
+				<p class="account">By clicking login, you agree to our <a href="#">Terms & Conditions!</a></p>
+				<p class="account1">Dont have an account? <a href="#">Register here</a></p>
+			</div>
+		</div>
+	
+	</div>
+	
+</div>
+	
 </body>
-</head>
 </html>
