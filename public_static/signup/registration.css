@@ -1,0 +1,93 @@
+body {
+
+    background-image: url(https://image.shutterstock.com/image-photo/medical-physician-doctor-woman-over-260nw-269015753.jpg); 
+      background-repeat: no-repeat;
+      background-size: 100% 1050px;
+      
+   
+      }
+      
+      
+      
+      form{
+        margin-left:5%;
+        margin-right:40%;
+        margin-bottom: 10%;
+          border-radius: 5px;
+      background-color: lightgray;
+      padding: 500px;
+      text-align: center;
+      height:900px;
+    }
+      
+      
+      /* form {
+      
+      text-align: center;
+      
+      margin: 40px 400px;
+      
+      
+      }
+      
+       */
+      
+      #reg {
+      
+      width: 40%;
+      /* background-color: rgba(182, 184, 185, 0.6); */    
+      padding: 110px 0px;      
+      border-radius: 20px;    
+      }
+      
+      
+      
+      #button {
+      
+      padding: 10px;
+      margin:10px;
+      
+      width: 340px;
+      
+      border-radius: 20px;
+      
+      }
+      
+      
+      
+      #but {
+      
+      color: #323537;
+      background-color: orange;
+      
+      font-size: 18px;
+      
+      padding: 10px;
+      
+      width: 250px;
+      
+      border-radius: 20px;
+       
+      }
+      
+      #but1{
+        color: #323537;
+        background-color:lightgreen;
+        
+        font-size: 18px;
+        
+        padding: 10px;
+        
+        width: 250px;
+        
+        border-radius: 20px;
+      }
+      
+      
+      
+      a{
+      
+      color: black;
+      
+      }
+      
