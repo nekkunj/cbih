@@ -1,27 +1,46 @@
-const route = require('express').Router()
-const mongoose=require('mongoose')
-const users=mongoose.model('users')
-route.post('/', (req,res)=>{
+// const route = require('express').Router()
+// const mongoose=require('mongoose')
+// const users=mongoose.model('users')
 
-    console.log(req.body)
-    insertRecord(req,res);
-})
-function insertRecord(req,res){
-    var user_one=new users()
-    user_one.fullname=req.body.Name
-    user_one.email=req.body.Email
-    user_one.mobile=req.body.Phone
-    console.log(typeof(req.body.Email))
-    // user_one.password=req.body.password
-    user_one.save((err,doc)=>{
-        if(!err){
-            res.redirect('/login');
-        }
-        else{
-            console.log('Error during insertion of user details ' + err)    
-        }
-    })
-}
-exports = module.exports = {
-    route
-}
+// route.get('/login',(req,res)=>{
+//     // res.render(require.resolve('E:/internship_summer_2019/cbih/public_static/login/index.ejs'))
+//     res.render('login')
+// })
+// route.get('/sign_up',(req,res)=>{
+//     res.render('signup')
+// })
+module.exports = function(app,passport) {
+    app.get('/login', function(req, res){
+      res.render('login.ejs');
+     });
+     app.get('/sign_up', function(req, res){
+        res.render('signup.ejs');
+       });
+       
+    }
+
+
+// route.post('/', (req,res)=>{
+
+//     console.log(req.body)
+//     insertRecord(req,res);
+// })
+// function insertRecord(req,res){
+//     var user_one=new users()
+//     user_one.fullname=req.body.Name
+//     user_one.email=req.body.Email
+//     user_one.mobile=req.body.Phone
+//     console.log(typeof(req.body.Email))
+//     // user_one.password=req.body.password
+//     user_one.save((err,doc)=>{
+//         if(!err){
+//             res.redirect('/login');
+//         }
+//         else{
+//             console.log('Error during insertion of user details ' + err)    
+//         }
+//     })
+// }
+// exports = module.exports = {
+//     route
+// }
