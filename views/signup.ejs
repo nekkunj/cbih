@@ -61,16 +61,22 @@
             </header>	
 <br><br><br><br><br><br><br>
 
-<form action='/addlogin' method="POST" id="reg">
-
+<form action='/sign_up' method="POST" id="reg" autocomplete="off">
+    
+    <% if(typeof errros!='undefined'){ %>
+        <% for(error in errors){  %>
+        <%=error.msg%>
+        
+        <%   }        %>
+        <%  }   %>
 <font size="8">Registration Form</font><br><br>
 
 <input type="text" name="Name" id="button" placeholder="Full Name"><br>
  <input type="date" name="Birthdate" id="button" placeholder="Birthdate"><br> 
  <input type="text" name="Phone" id="button" placeholder="Phone"><br> 
  <input type="email" name="Email" id="button" placeholder="Email"><br> 
- <input type="password" name="password" id="button" placeholder="Password"><br>
- <input type="password" name="password" id="button" placeholder="Retype Password"><br><br>
+ <input type="password" name="Password" id="button" placeholder="Password"><br>
+ <input type="password" name="Passwordtwo" id="button" placeholder="Retype Password"><br><br>
 <h3 style="text-align:start;margin-left:100px;">Gender: </h3> 
 <input type="radio" name="gender" id="rd"><font size="4">Male</font> 
 <br>

@@ -92,17 +92,20 @@
 			</div>
 			<div class="w3_info">
 				<h2>Login to your Account</h2>
-				<p>Enter your details to login.</p>
-				<form action="#" method="post">
+                <p>Enter your details to login.</p>
+                <% if(message.length > 0) { %>
+                    <div class="alert alert-danger"><%= message %></div> 
+                   <% } %>
+				<form action="/login" method="POST">
 					<label>Email Address</label>
 					<div class="input-group">
 						<span class="fa fa-envelope" aria-hidden="true"></span>
-						<input type="email" placeholder="Enter Your Email" required=""> 
+						<input type="email" name="email" placeholder="Enter Your Email" required=""> 
 					</div>
 					<label>Password</label>
 					<div class="input-group">
 						<span class="fa fa-lock" aria-hidden="true"></span>
-						<input type="Password" placeholder="Enter Password" required="">
+						<input type="Password" name="password" placeholder="Enter Password" required="">
 					</div> 
 					<div class="login-check">
 						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Remember me</label>
