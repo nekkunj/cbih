@@ -62,27 +62,25 @@
 <br><br><br><br><br><br><br>
 
 <form action='/sign_up' method="POST" id="reg" autocomplete="off">
-    
-    <% if(typeof errros!='undefined'){ %>
-        <% for(error in errors){  %>
-        <%=error.msg%>
-        
-        <%   }        %>
-        <%  }   %>
-<font size="8">Registration Form</font><br><br>
+    <font size="8">Registration Form</font><br><br>    
+   
+    <% if(error_msg != ''){ %> 
+        <div  class="alert alert-danger"><%=error_msg%></div>
+        <%}%>        
 
-<input type="text" name="Name" id="button" placeholder="Full Name"><br>
- <input type="date" name="Birthdate" id="button" placeholder="Birthdate"><br> 
- <input type="text" name="Phone" id="button" placeholder="Phone"><br> 
- <input type="email" name="Email" id="button" placeholder="Email"><br> 
- <input type="password" name="Password" id="button" placeholder="Password"><br>
- <input type="password" name="Passwordtwo" id="button" placeholder="Retype Password"><br><br>
-<h3 style="text-align:start;margin-left:100px;">Gender: </h3> 
-<input type="radio" name="gender" id="rd"><font size="4">Male</font> 
+
+<label><font size="4">Full Name</font></label><input type="text" name="Name" id="button" placeholder="Full Name"><br>
+<label><font size="4">Date Of Birth</font><input type="date" name="Birthdate" id="button" placeholder="Birthdate" ><br> 
+<label><font size="4">Phone number</font><input type="text" name="Phone" id="button" placeholder="Phone"><br> 
+<label><font size="4">Email Id</font><input type="text" name="Email" id="button" placeholder="Email"><br> 
+<label><font size="4">Password</font> <input type="password" name="Password" id="button" placeholder="Password"><br>
+<label><font size="4">Retype Password</font><input type="password" name="Passwordtwo" id="button" placeholder="Retype Password"><br><br>
+    <label><font size="4">Gender</font>
+<input type="radio" name="gender" value="m" id="rd"><font size="4">Male</font> 
 <br>
-<input type="radio" name="gender" id="rd"><font size="4">Female</font> 
+<input type="radio" name="gender" id="rd" value="f"><font size="4">Female</font> 
 <br>
-<input type="radio" name="gender" id="rd"><font size="4">Other</font>
+<input type="radio" name="gender" id="rd" value="o"><font size="4">Other</font>
 <br><br><br>
 
 <input type="submit" id="but" ><br>
@@ -93,9 +91,7 @@
 
 <a href="Contact.html"><font size="4">Contact us</font></a><br> 
 </form>
-<footer>
-<div class="copy"><p>Copyright &copy; 2019 @ Cross Border Irish Limited - UNIT 4 - The Seapoint Building, Clontarf, Dublin 3 - PI: 3493398RH | <a href="https://cbih.org/privacy-policy/">Privacy policy</a> | <a href="https://cbih.org/cookies-policy/">Cookies policy</a> | website by <a href="https://www.suasor.it/" target="_blank">suasor</a></p></div>
-</footer>
+
 </body>
 </head>
 

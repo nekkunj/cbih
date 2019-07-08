@@ -2,6 +2,7 @@
 //   const art=require('express-ejs-layouts')
     const app = express();
     const passport = require('passport');
+    const session=require('express-session')
 
 require('./models/db');
 const path=require('path')
@@ -17,11 +18,8 @@ require('./config/passport')(passport);
 // app.use(art)
 var morgan=require('morgan')
 const flash = require('connect-flash');
-const session=require('express-session')
 
-//Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 app.use(flash());
  
@@ -30,12 +28,17 @@ app.use(session({
     resave:true,
     saveUninitialized:true
 }));
+//Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
 
-// app.use((req,res,next)=>{
-//     res.locals.success_msg=req.flash('success_msg');
-//     res.locals.error_msg=req.flash('error_msg');
-// })
+app.use((req,res,next)=>{
+    res.locals.success_msg=req.flash('success_msg');
+    res.locals.error_msg=req.flash('error_msg');
+    next();
+})
 require('./api/index.js')(app,passport);
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));

@@ -5,7 +5,17 @@ const bcrypt=require('bcryptjs')
 // const users  =require('../models/user.model')
 const users=mongoose.model('users')
 module.exports=function(passport){
-    
+    passport.serializeUser(function(user, done){
+        console.log(user.email);
+       done(null, user.id);
+      });
+     
+      passport.deserializeUser(function(id, done){
+       users.findById(id,(err,user)=>{
+           done(err,user)
+       })
+      });
+
 passport.use(
     new localstrategy({
         passReqToCallback : true
@@ -23,11 +33,11 @@ passport.use(
 if(err) throw err;
 
 if(isMatch){
-    console.log('is match')
+    console.log('login successful')
     return done(null,user);
 }   else{
     console.log('password wrong')
-    return done(null,false, req.flash('loginMessage','Password incorrect') )
+    return done(null,false, req.flash('loginMessage','Incorrect Password') )
 }
             })
         })
@@ -37,16 +47,7 @@ if(isMatch){
 )
 
 
-passport.serializeUser(function(user, done){
-    console.log("user.id");
-   done(null, user.id);
-  });
- 
-  passport.deserializeUser(function(id, done){
-   users.findById(id,(err,user)=>{
-       done(err,user)
-   })
-  });
+
 
 
 
