@@ -47,8 +47,7 @@ var applicationschema=new mongoose.Schema({
         type:String
     },
     complaint_nature:{
-        type:String,
-        required:true
+        type:String
     },
     message:{
         type:String
@@ -58,6 +57,6 @@ var applicationschema=new mongoose.Schema({
 
 });
 
-mongoose.model('users',applicationschema);
+mongoose.model('application',applicationschema);
 
 

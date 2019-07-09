@@ -40,6 +40,7 @@ app.use((req,res,next)=>{
     next();
 })
 require('./api/index.js')(app,passport);
+require('./routes/addapplication.js')(app);
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use('/',express.static(__dirname+"/public_static"))
@@ -50,7 +51,7 @@ app.use('/en/contact_us',express.static(__dirname+"/public_static/contact_us.htm
 app.use('/en/faqs',express.static(__dirname+"/public_static/faqs.html"))
 app.use('/en/about_us',express.static(__dirname+"/public_static/about_us.html"))
 
-//  app.use('/addlogin', require('./routes').route)
+// app.use('/add_application',require('./routes/addapplication').route)
 
 app.listen(7007,(err)=>{
     console.log("Server Started at http://localhost:7007")

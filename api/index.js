@@ -1,6 +1,7 @@
 const mongoose=require('mongoose')
 const users=mongoose.model('users')
 const bcrypt=require('bcryptjs')
+const application=mongoose.model('application')
 // const express=require('express')
 // const app=express()
 // var flash=require("connect-flash");
@@ -67,10 +68,10 @@ app.post('/login',
             req.flash('error_msg','Password not in required format')
             res.redirect('/sign_up')
          }
-         else if(emailReg.test(temp_email)==false){
-            req.flash('error_msg','Email incorrect')
-            res.redirect('/sign_up')
-         }
+         // else if(emailReg.test(temp_email)==false){
+         //    req.flash('error_msg','Email incorrect')
+         //    res.redirect('/sign_up')
+         // }
        
 else{
          users.findOne({email:req.body.Email})
@@ -122,10 +123,23 @@ else{
 
      app.get('/dashboard', isLoggedIn,(req, res) =>{
      console.log(req.user)
-
-        res.render('dashboard.ejs', {
-       user: req.user
-     })
+//Finding application information from user email
+application.findOne({email:req.user.email})
+.then(one=>{
+if(one){
+   res.render('dashboard.ejs', {
+      user: req.user,
+      app:one
+    })
+}
+else{
+   console.log('u are fucked')
+}
+})
+.catch((err)=>{
+   console.log('got an error'+ err)
+})
+       
 }
    );
 

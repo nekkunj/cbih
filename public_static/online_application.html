@@ -74,6 +74,141 @@
 		gtag('js', new Date());
 		gtag('config', 'AW-1024299568');
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script >
+function validateEmail(sEmail) {
+    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (filter.test(sEmail)==true) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+
+
+	function checkform(myform){
+	
+		$('#name_error').empty()
+		$('#surname_error').empty()
+		$('#address_error').empty()
+		$('#phone_error').empty()
+		$('#date_of_birth_error').empty()
+		$('#gp_name_error').empty()
+		$('#gp_phone_error').empty()
+		$('#complaint_error').empty()
+		$('#email_error').empty()
+
+		if( $('#name').val()==""){
+			$('#name_error').append('*please enter this field')
+			return false;
+		}
+		if($('#surname').val()==""){
+		$('#surname_error').append('*please enter this field')
+		return false;}
+
+		if(  $('#address').val()==""){
+			$('#address_error').append('*please enter this field')
+			return false;
+		}
+		if( $('#email').val()=="" ){
+			$('#email_error').append('*please enter this field')
+			return false;
+		}
+		if( $('#phone').val()==""){
+			$('#phone_error').append('*please enter this field')
+			return false;
+		}
+		if(  $('#date_of_birth').val()==""){
+			$('#date_of_birth_error').append('*please enter this field')	
+			return false;
+		}
+		if( $('#gp_name').val()==""){
+			$('#gp_name_error').append('*please enter this field')
+			return false;
+		}
+		if( $('#gp_number').val()==""){
+			$('#gp_phone_error').append('*please enter this field')
+
+			return false;
+		}
+		if( $('#complaint').val()=="0"){
+			$('#complaint_error').append('*please select the complaint')
+
+			return false;
+		}
+		var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+		 if(phoneno.test($('#phone').val())==false){
+			$('#phone_error').append('*Invalid phone number')
+		   console.log('incorrect phone number')
+			return false;
+		 }
+		 if(phoneno.test($('#gp_number').val())==false){
+			$('#gp_phone_error').append('*Invalid phone number')
+			return false;
+		 }
+		 if( $('#medical_center_phone_number').val()!="" &&  phoneno.test($('#medical_center_phone_number').val())==false){
+		   console.log('incorrect phone number')
+		   $('#medical_center_phone_error').append('*Invalid phone number')
+			return false;
+		 }
+		 if( $('#hospital_phone_number').val()!="" &&  phoneno.test($('#hospital_phone_number').val())==false){
+		   console.log('incorrect phone number')
+		   $('#hospital_phone_error').append('*Invalid phone number')
+
+			return false;
+		 }
+
+		 
+ 
+ //Get the date from the TextBox.
+ var dateString = $('#date_of_birth').val()
+ var regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
+
+ //Check whether valid dd/MM/yyyy Date Format.
+ if (regex.test(dateString)) {
+	 var parts = dateString.split("/");
+	 var dtDOB = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+	 var dtCurrent = new Date();
+
+	 var sEmail = $('#email').val();
+
+if ($.trim(sEmail).length == 0) {
+	
+	$('#email_error').append('Please enter valid email address');
+	return false;
+}
+
+if (validateEmail(sEmail)==false) {
+	
+	$('#email_error').append('Invalid Email Address');
+	return false;
+}
+
+	 if (dtCurrent.getFullYear() == dtDOB.getFullYear() && dtCurrent.getMonth() == dtDOB.getMonth() && dtCurrent.getDate() < dtDOB.getDate()) {
+		console.log('date problem')
+		$('#date_of_birth_error').append('*Date of birth cannot be greater than present date')
+		return false;
+	 }
+	 if(dtCurrent.getFullYear()<dtDOB.getFullYear()){
+		$('#date_of_birth_error').append('*Date of birth cannot be greater than present date')
+		 return false;
+	 }
+	 if(dtCurrent.getFullYear()==dtDOB.getFullYear() && dtCurrent.getMonth()<dtDOB.getMonth())
+	 {$('#date_of_birth_error').append('*Date of birth cannot be greater than present date')
+		 return false;
+	 }
+	 } else {
+		$('#date_of_birth_error').append('*Date of birth must be in dd/mm/yyyy format')
+	 return false;
+ }
+
+	
+	return true;
+}
+	</script>
 		</head>	
 	<body>
 			
@@ -115,26 +250,32 @@
 					<div class="col-md-9">
 						<div class="af-box">
 							<h1>Online application</h1>
-				<form role="form" name="application-form" id="application-form" method="post" action="/add_application">
+				<form role="form" name="application-form" id="application-form" method="post"  action="/add_application" onsubmit="return checkform(this)">
 							<h3>Personal information</h3>
 							<div class="row">
+								<div id="name_error" class="container" style="color:red"></div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="name" class="sr-only">Name</label>
 										<input type="text" class="form-control" id="name" name="name" placeholder="Name *" value="">
 										<small id="nameHelp" class="form-text text-muted"></small>
 									</div>
+									
 								</div>
+								
 								<div class="col-md-6">
+										<div id="surname_error" class="" style="color:red"></div>		
 									<div class="form-group">
+											
 										<label for="surname" class="sr-only">Surname</label>
-										<input type="text" class="form-control" id="surname" name="surname" placeholder="Surname *" value="">
+										<input type="text" class="form-control" id="surname" name="surname" placeholder="Surname *" >
 										<small id="surnameHelp" class="form-text text-muted"></small>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-12">
+										<div id="address_error" class="" style="color:red"></div>
 									<div class="form-group">
 										<label for="address" class="sr-only">Address</label>
 										<input type="text" class="form-control" id="address" name="address" placeholder="Address *" value="">
@@ -144,6 +285,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6">
+										<div id="phone_error" class="" style="color:red"></div>
 									<div class="form-group">
 										<label for="phone" class="sr-only">Phone</label>
 										<input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone *" value="">
@@ -151,15 +293,17 @@
 									</div>
 								</div>
 								<div class="col-md-6">
+										<div id="email_error" class="" style="color:red"></div>
 									<div class="form-group">
 										<label for="email" class="sr-only">Email address</label>
-										<input type="email" class="form-control" id="email" name="email" placeholder="Email address *" value="">
+										<input type="text" class="form-control" id="email" name="email" placeholder="Email address *" value="">
 										<small id="emailHelp" class="form-text text-muted"></small>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-6">
+										<div id="date_of_birth_error" class="" style="color:red"></div>
 									<div class="form-group">
 										<label for="date_of_birth" class="sr-only">Date of birth</label>
 										<input type="text" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Date of birth *" value="">
@@ -181,6 +325,7 @@
 							
 							<div class="row">
 								<div class="col-md-6">
+										<div id="gp_name_error" class="" style="color:red"></div>
 									<div class="form-group">
 										<label for="gp_name" class="sr-only">Name of GP</label>
 										<input type="text" class="form-control" id="gp_name" name="gp_name" placeholder="Name of GP *" value="">
@@ -188,6 +333,7 @@
 									</div>
 								</div>
 								<div class="col-md-6">
+										<div id="gp_phone_error" class="" style="color:red"></div>
 									<div class="form-group">
 										<label for="gp_number" class="sr-only">GP Phone Number</label>
 										<input type="text" class="form-control" id="gp_number" name="gp_number" placeholder="GP Phone Number *" value="">
@@ -197,6 +343,7 @@
 							</div>						
 							<div class="row">
 								<div class="col-md-6">
+										<div id="medical_center_error" class="" style="color:red"></div>
 									<div class="form-group">
 										<label for="medical_center" class="sr-only">Medical center</label>
 										<input type="text" class="form-control" id="medical_center" name="medical_center" placeholder="Medical center" value="">
@@ -204,6 +351,8 @@
 									</div>
 								</div>
 								<div class="col-md-6">
+										<div id="medical_center_phone_error" class="" style="color:red"></div>
+
 									<div class="form-group">
 										<label for="medical_center_phone_number" class="sr-only">Medical center phone number</label>
 										<input type="text" class="form-control" id="medical_center_phone_number" name="medical_center_phone_number" placeholder="Medical center phone number" value="">
@@ -213,6 +362,8 @@
 							</div>				
 							<div class="row">
 								<div class="col-md-6">
+										<div id="hospital_error" class="" style="color:red"></div>
+
 									<div class="form-group">
 										<label for="hospital" class="sr-only">Hospital</label>
 										<input type="text" class="form-control" id="hospital" name="hospital" placeholder="Hospital" value="">
@@ -220,6 +371,8 @@
 									</div>
 								</div>
 								<div class="col-md-6">
+										<div id="hospital_phone_error" class="" style="color:red"></div>
+
 									<div class="form-group">
 										<label for="hospital_phone_number" class="sr-only">Hospital phone number</label>
 										<input type="text" class="form-control" id="hospital_phone_number" name="hospital_phone_number" placeholder="Hospital phone number" value="">
@@ -229,6 +382,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6">
+										<div id="complaint_error" class="" style="color:red"></div>
 									<div class="form-group">
 										<label for="complaint" class="sr-only">CONTACT_COMPLAINT</label>
 										<select name="complaint" id="complaint" class="form-control">
@@ -252,7 +406,7 @@
 								</div>
 							</div>
 							
-							<div class="form-group" style="vertical-align:top">
+							<!-- <div class="form-group" style="vertical-align:top">
 								<img src="https://cbih.org/assets/plugins/captcha/captcha.php" id="captcha-image">
 							</div>
 							<div class="form-group">
@@ -260,7 +414,7 @@
 									<a href="#" onclick="document.getElementById('captcha-image').src='../assets/plugins/captcha/captcha.php?'+Math.random();document.getElementById('captcha').focus();" id="change-image">Change image</a>
 								</p>
 								<input type="text" class="form-control" name="captcha" id="captcha" autocomplete="off" />
-							</div>
+							</div> -->
 							<input type="hidden" id="form" name="form" value="application-form">
 							<input type="hidden" name="lang" class="form-lang" value="en">
 							<button type="submit" class="btn btn-form" name="send">SUBMIT YOUR REQUEST</button>

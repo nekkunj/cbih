@@ -18,7 +18,18 @@ body {
       padding: 500px;
       text-align: center;
       height:900px;
+      direction: ltr;
     }
+    label{
+      display: table-cell;
+      text-align: right;
+  }
+  input {
+    display: table-cell;
+  }
+  div.row{
+      display:table-row;
+  }
       
       
       /* form {
@@ -83,11 +94,15 @@ body {
         border-radius: 20px;
       }
       
-      
+      #gender{
+        margin-left:20px;
+      }
+      input[type=radio] {
+        margin-left:20px;
+      }
       
       a{
       
       color: black;
       
       }
-      
