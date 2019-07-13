@@ -51,8 +51,8 @@ app.post('/login',
          }
          
          
-         else if(p.length<6){
-            req.flash('error_msg','Password must be of atleast 6 characters')
+         else if(p.length<8){
+            req.flash('error_msg','Password must be of atleast 8 characters')
             res.redirect('/sign_up')
          }
          else if(p.length>24){
@@ -122,7 +122,7 @@ else{
      })       
 
      app.get('/dashboard', isLoggedIn,(req, res) =>{
-     console.log(req.user)
+     
 //Finding application information from user email
 application.findOne({email:req.user.email})
 .then(one=>{
@@ -133,7 +133,7 @@ if(one){
     })
 }
 else{
-   console.log('u are fucked')
+   console.log('login email id and application email id must be same')
 }
 })
 .catch((err)=>{

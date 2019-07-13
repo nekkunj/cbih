@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script >
+  function allow(abc){
+    var em=$(abc).attr('id')
+    $.post('/allow',{
+      Email:em
+    })
+  }
+  </script>
+</head>
+<body>
+<br>
+
+<div class="container">
+  <h2>Toggleable Tabs</h2>
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+      <h3>Under verification</h3>
+      <div class="conatiner" style="display: flex;flex-wrap:wrap">
+     <%e=app.length%>
+      <%for(var i=0;i<e;i++){  %>
+        <% if(app[i].status==='Under review'){%>
+        <div class="card" style="width: 20rem;margin:1%">
+            <div class="card-body">
+              <h5 class="card-title " style="text-align:center;font-weight:bolder"><%=app[i].name%> <%=app[i].surname%></h5><br>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Email:</label>&nbsp; <%=app[i].email%> </span>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Phone number:</label>&nbsp; <%=app[i].phone%> </span>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Complaint type:</label>&nbsp; 
+              <%if(app[i].complaint_nature==1){%>
+                Hip Replacement
+                <%} else if(app[i].complaint_nature==2){%>
+                Cataracts
+                <%} else if(app[i].complaint_nature==3){%>
+                Knee Replacement
+                <%} else{%>
+                    Others
+
+                <%}%>
+            </span>
+            <br>
+            <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Address:</label>&nbsp; <%=app[i].address%> </span>
+
+
+<br>
+<br>  
+              <a href="#" class="btn btn-primary" >Full details</a>
+              <a onclick="allow(this)" id="<%=app[i].email%>" class="btn btn-success" style="float:right">Allow</a>
+
+            </div>
+            <div class="card-footer text-muted">
+               Applied  on <%app[i].current_date%>
+              </div>
+          </div>
+     
+        <br>
+      <%}}%>
+      </div>
+    </div>
+    <div id="menu1" class="container tab-pane fade"><br>
+      <h3>documentation</h3>
+      
+      <div class="conatiner" style="display: flex;flex-wrap:wrap">
+     <%e=app.length%>
+     <%f=doc.length%>
+     
+      <%for(var i=0;i<e;i++){  %>
+          <% var flag=0%>
+        <% if(app[i].status==='Application Accepted'){%>
+          <% for(var j=0;j<f;j++){%>
+            <% if(doc[j].document_status==='Processing'){%>        
+              <%if(flag==0 && doc[j].email==app[i].email){%>
+               <%flag=1%>
+        <div class="card" style="width: 20rem;margin:1%">
+            <div class="card-body">
+              <h5 class="card-title " style="text-align:center;font-weight:bolder"><%=app[i].name%> <%=app[i].surname%></h5><br>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Email:</label>&nbsp; <%=app[i].email%> </span>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Phone number:</label>&nbsp; <%=app[i].phone%> </span>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Complaint type:</label>&nbsp; 
+              <%if(app[i].complaint_nature==1){%>
+                Hip Replacement
+                <%} else if(app[i].complaint_nature==2){%>
+                Cataracts
+                <%} else if(app[i].complaint_nature==3){%>
+                Knee Replacement
+                <%} else{%>
+                    Others
+
+                <%}%>
+            </span>
+            <br>
+            <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Address:</label>&nbsp; <%=app[i].address%> </span>
+
+
+<br>
+<br>  
+              <a href="#" class="btn btn-primary" >Full details</a>
+              <a onclick="allow(this)" id="<%=app[i].email%>" class="btn btn-success" style="float:right">Allow</a>
+
+            </div>
+            <div class="card-footer text-muted">
+               Applied  on <%app[i].current_date%>
+              </div>
+          </div>
+     
+        <br>
+      <%}}}}}%>
+      </div>
+    </div>
+    <div id="menu2" class="container tab-pane fade"><br>
+      <h3>final</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

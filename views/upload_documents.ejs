@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+img {
+      width: 100%;
+    }
+</style>
+<script src="upload_documents.js">
+  </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+        <div class="col-md-6 " id="formone">
+            <h2 class="  my-4">Upload Photo</h2>
+       <form action="/documents/photo" method="post" enctype="multipart/form-data" > 
+        <div id="form1_div"></div>
+       
+        <div class="custom-file mb-3">
+      
+    <input type="file" name="file" id="file" class="custom-file-input">
+    <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+    
+    </div>
+    <input type="submit" value="Upload" class="btn btn-success btn-block">
+    </form>
+    <hr>
+        </div>
+        <div class="col-md-6 " style="margin-top:10%">
+    <% if(file_photo){ %>
+        <% file_photo.forEach(function(file) { %>
+          <div class="card card-body mb-3">
+            <% if(file.isImage) { %>
+              <img src="image/<%= file.filename %>" alt="">
+              <% } else { %>
+                <a href="files/<%= file.filename %>">Download File</a>
+                  <% } %>
+                    <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                      <button class="btn btn-danger btn-block mt-4">Delete</button>
+                    </form>
+          </div>
+          <% }) %>
+            <% } else { %>
+              <p>No files to show</p>
+              <% } %>
+         </div>
+    </div>
+<div class="row">
+  <div class="col-md-6"  id="form2">
+    <h2 class="my-4">Upload identification Card</h2>
+    <form action="/documents/idcard" method="post" enctype="multipart/form-data">
+      <div id="form2_div"></div>
+
+      <div class="custom-file mb-3">
+        
+      <input type="file" name="file" id="file" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg">
+      <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+      </div>
+      <input type="submit" value="Upload" class="btn btn-success btn-block">
+      </form>
+  </div>
+  <div class="col-md-6 " style="margin-top:10%">
+    <% if(file_idcard){ %>
+        <% file_idcard.forEach(function(file) { %>
+          <div class="card card-body mb-3">
+            <% if(file.isImage) { %>
+              <img src="image/<%= file.filename %>" alt="">
+              <% } else { %>
+                <a href="files/<%= file.filename %>">Download File</a>
+                  <% } %>
+                    <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                      <button class="btn btn-danger btn-block mt-4">Delete</button>
+                    </form>
+          </div>
+          <% }) %>
+            <% } else { %>
+              <p>No files to show</p>
+              <% } %>
+         </div>
+</div>
+<div class="row">
+    <div class="col-md-6" id="form3">
+      <h2 class="my-4">Upload hospital documents</h2>
+      <form action="/documents/hospital" method="post" enctype="multipart/form-data" >
+
+        <div id="form3_div"></div>
+        <div class="custom-file mb-3">
+          
+        <input type="file" name="file" id="file" class="custom-file-input">
+        <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+        </div>
+        <input type="submit" value="Upload" class="btn btn-success btn-block">
+        </form>
+    </div>
+    <div class="col-md-6 " style="margin-top:10%">
+      <% if(file_hospital){ %>
+          <% file_hospital.forEach(function(file) { %>
+            <div class="card card-body mb-3">
+              <% if(file.isImage) { %>
+                <img src="image/<%= file.filename %>" alt="">
+                <% } else { %>
+                  <a href="files/<%= file.filename %>">Download File</a>
+                    <% } %>
+                      <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                        <button class="btn btn-danger btn-block mt-4">Delete</button>
+                      </form>
+            </div>
+            <% }) %>
+              <% } else { %>
+                <p>No files to show</p>
+                <% } %>
+           </div>
+  </div>
+
+
+    
+</body>
+</html>

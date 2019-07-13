@@ -51,6 +51,10 @@ var applicationschema=new mongoose.Schema({
     },
     message:{
         type:String
+    },
+    status:{
+        type:String,
+        default:"Under preview"
     }
         
     

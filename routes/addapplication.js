@@ -4,7 +4,7 @@ const application=mongoose.model('application')
 
 module.exports=function(app){
 app.post('/add_application',(req,res)=>{
-
+console.log(typeof(req.body.complaint))
 var application_one=new application()
 application_one.name=req.body.name
 application_one.surname=req.body.surname
@@ -18,8 +18,9 @@ application_one.medical_center=req.body.medical_center
 application_one.medical_center_phone=req.body.medical_center_phone_number
 application_one.hospital=req.body.hospital
 application_one.hospital_phone=req.body.hospital_phone_number
-application_one.compliant_nature=req.body.complaint
+application_one.complaint_nature=req.body.complaint
 application_one.message=req.body.message
+application_one.status="Under review"
 application_one.save().then(user=>{
                    req.flash('success_msg','signup successful,now login')
                    res.redirect('/login')

@@ -26,6 +26,9 @@
 function resethash(){
     location.hash = '';
 }
+
+
+
 </script>
 </head>
 <body>
@@ -105,7 +108,7 @@ function resethash(){
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><%= user.email %></p>
+                                                <p id="user_email" value="<%= user.email %>"><%= user.email %></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -164,7 +167,25 @@ function resethash(){
                                                 <p><%= app.medical_center_phone%></p>
                                             </div>
                                         </div>
-                                        
+                                        <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Complaint Type</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                                                                
+                                                        <%if(app.complaint_nature==1){%>
+                                                            <p>Hip Replacement</p>
+                                                            <%} else if(app.complaint_nature==2){%>
+                                                            <p>Cataracts</p>
+                                                            <%} else if(app.complaint_nature==3){%>
+                                                                <p>Knee Replacement</p>
+                                                            <%} else{%>
+                                                                <p>Others</p>
+
+                                                            <%}%>
+                                    </div>
+                                            </div>
+                                            
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Hospital</label>
@@ -193,50 +214,25 @@ function resethash(){
                             <div class="tab-pane fade" id="profile" name="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Experience</label>
+                                                <label>Application Status</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Expert</p>
+                                                <p><%=app.status%></p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Hourly Rate</label>
+                                        <%if(app.status=="Application Accepted"){%>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Upload Documenets</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                        <p><a href="/upload_documents">Click here</a></p>
+                                                    </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>10$/hr</p>
-                                            </div>
+                                            <%}%>
+                                       
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Total Projects</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>230</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>English Level</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Availability</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>6 months</p>
-                                            </div>
-                                        </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
-                                    </div>
-                                </div>
+                                        
                             </div>
                         </div>
                     </div>
