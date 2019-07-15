@@ -10,6 +10,13 @@
     const Grid = require('gridfs-stream');
     const methodOverride = require('method-override');
 
+
+
+
+
+
+
+
 require('./models/db');
 
 const path=require('path')
@@ -63,14 +70,14 @@ app.use(express.static(__dirname + '/public'));
 app.use('/',express.static(__dirname+"/public_static"))
 app.use('/en/cross_border_health',express.static(__dirname+"/public_static/services.html"))
 app.use('/en/application',express.static(__dirname+"/public_static/application.html"))
-app.use('/en/online_application',express.static(__dirname+"/public_static/online_application.html"))
+// app.use('/en/online_application',express.static(__dirname+"/public_static/online_application.html"))
 app.use('/en/contact_us',express.static(__dirname+"/public_static/contact_us.html"))
 app.use('/en/faqs',express.static(__dirname+"/public_static/faqs.html"))
 app.use('/en/about_us',express.static(__dirname+"/public_static/about_us.html"))
 
+
  app.use('/allow',require('./routes/allow.js').route)
 //  app.use('/allow',require('./routes/change_document_status.js').route)
-
 
 
 app.listen(7007,(err)=>{

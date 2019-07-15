@@ -15,8 +15,6 @@ app.get('/backend',(req,res)=>{
 if(app){
 user_document_relation.find()
 .then(item=>{
-
-
     res.render('backend.ejs',{
         app:app,
         doc:item

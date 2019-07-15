@@ -22,6 +22,12 @@ var userschema=new mongoose.Schema({
     },
     gender:{
         type:String
+    },
+    secretkey:{
+        type:String
+    },
+    active:{
+        type:Boolean
     }
         
     

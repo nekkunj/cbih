@@ -6,7 +6,22 @@ const application=mongoose.model('application')
 // const app=express()
 // var flash=require("connect-flash");
 // app.use(flash());
+const mailer = require('express-mailer');
 
+const randomstring =require('randomstring')
+const user_document_relation=mongoose.model('userdocumentrelation')
+
+mailer.extend(app, {
+   from: 'nekkunjpilani@gmail.com',
+   host: 'smtp.gmail.com', // hostname
+   secureConnection: true, // use SSL
+   port: 465, // port for secure SMTP
+   transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+   auth: {
+     user: 'nekkunjpilani@gmail.com',
+     pass: 'nikunj24'
+   }
+ });
 module.exports = function(app,passport) {
     app.get('/login',isnotloggedin, function(req, res){
       res.render('login.ejs',{message:req.flash('loginMessage')});
@@ -18,11 +33,11 @@ module.exports = function(app,passport) {
 
 app.post('/login',
    passport.authenticate('local', {
-   successRedirect: '/dashboard',
+   successRedirect: '/en/online_application',
    failureRedirect: '/login',
    failureFlash:true
   }),function(req,res){
-  
+  console.log(req.user.email)
   }
   
 
@@ -35,14 +50,18 @@ app.post('/login',
          
          var s=req.body.Phone
          var p=req.body.Password
-         var temp_email=req.body.email
+         var temp_email=req.body.Email
          var emailReg = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
         var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
         var strongPassword= new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-         
+        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
          if(!req.body.Name || !req.body.Email || !req.body.Phone || !req.body.Password || !req.body.gender ){
             req.flash('error_msg','Please Fill in all the details')
+            res.redirect('/sign_up')
+         }
+         else if(emailReg.test(temp_email)==false){
+            req.flash('error_msg','Email incorrect')
             res.redirect('/sign_up')
          }
          else if(req.body.Password!=req.body.Passwordtwo){
@@ -68,10 +87,10 @@ app.post('/login',
             req.flash('error_msg','Password not in required format')
             res.redirect('/sign_up')
          }
-         // else if(emailReg.test(temp_email)==false){
-         //    req.flash('error_msg','Email incorrect')
-         //    res.redirect('/sign_up')
-         // }
+         
+        
+         
+        
        
 else{
          users.findOne({email:req.body.Email})
@@ -89,7 +108,10 @@ else{
                user_one.dateofbirth=req.body.Birthdate
                user_one.gender=req.body.gender
                user_one.password=req.body.Password
-            
+               const secrettoken=randomstring.generate()
+              
+               user_one.randomstring=secrettoken
+               user_one.active=false
                bcrypt.genSalt(10,(err,salt)=>{
                  bcrypt.hash(user_one.password,salt,(err,hash)=>{
                   console.log(typeof(hash))  
@@ -101,7 +123,8 @@ else{
                 
                   // req.flash('success_msg','signup successful,now login')
                   // res.redirect('/login')
-                  res.redirect('/en/online_application')
+                  res.redirect('/verify')
+                  
                })    
                .catch(err=>console.log(err))
                
@@ -127,13 +150,29 @@ else{
 application.findOne({email:req.user.email})
 .then(one=>{
 if(one){
-   res.render('dashboard.ejs', {
-      user: req.user,
-      app:one
-    })
+user_document_relation.findOne({email:req.user.email})
+.then(usdo=>{
+   if(usdo){
+      res.render('dashboard.ejs', {
+         user: req.user,
+         app:one,
+         user_doc:usdo
+       })
+   }
+   else{
+      res.render('dashboard.ejs', {
+         user: req.user,
+         app:one,
+         user_doc:false
+       })
+   }
+})
+.catch(err=>console.log(err))
+ 
 }
 else{
    console.log('login email id and application email id must be same')
+   res.redirect('/en/online_application') 
 }
 })
 .catch((err)=>{
@@ -142,8 +181,39 @@ else{
        
 }
    );
+   app.get('/en/online_application',isLoggedIn,(req,res)=>{
+      application.findOne({email:req.user.email})
+      .then(us=>{
+         if(us){
+            
+            res.redirect('/dashboard')
+         }
+         else{
+            res.render('online_application',{user:req.user})
+         }
+      })
+      .catch(err=>{console.log(err)})
+      
+   })
 
-
+   app.get('/verify', function(req,res){
+      res.render('verify')
+     })
+app.get('/send_email', function (req, res, next) {
+    app.mailer.send('email', {
+      to: 'aggarwalyash309@gmail.com', // REQUIRED. This can be a comma delimited string just like a normal email to field. 
+      subject: 'Test Email', // REQUIRED.
+      otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
+    }, function (err) {
+      if (err) {
+        // handle error
+        console.log(err);
+        res.send('There was an error sending the email');
+        return;
+      }
+      res.send('Email Sent');
+    });
+  });
 
    app.get('/logout', function(req,res){
       req.logout();
@@ -166,10 +236,14 @@ else{
       res.redirect('/dashboard');
       }
      }
+     
+
+
     };
 
     
 
 
     
+  
     

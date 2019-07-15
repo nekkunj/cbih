@@ -38,8 +38,10 @@ img {
     <hr>
         </div>
         <div class="col-md-6 " style="margin-top:10%">
-    <% if(file_photo){ %>
-        <% file_photo.forEach(function(file) { %>
+    <% if(files && user_doc){ %>
+        <% files.forEach(function(file) { %>
+          <%user_doc.forEach(function(uc){%>
+            <%if(uc.filename===file.filename && uc.type_of_file==='photo'){%>
           <div class="card card-body mb-3">
             <% if(file.isImage) { %>
               <img src="image/<%= file.filename %>" alt="">
@@ -50,7 +52,7 @@ img {
                       <button class="btn btn-danger btn-block mt-4">Delete</button>
                     </form>
           </div>
-          <% }) %>
+          <%} })}) %>
             <% } else { %>
               <p>No files to show</p>
               <% } %>
@@ -71,8 +73,10 @@ img {
       </form>
   </div>
   <div class="col-md-6 " style="margin-top:10%">
-    <% if(file_idcard){ %>
-        <% file_idcard.forEach(function(file) { %>
+      <% if(files && user_doc){ %>
+        <% files.forEach(function(file) { %>
+          <%user_doc.forEach(function(uc){%>
+            <%if(uc.filename===file.filename && uc.type_of_file==='idcard'){%>
           <div class="card card-body mb-3">
             <% if(file.isImage) { %>
               <img src="image/<%= file.filename %>" alt="">
@@ -83,7 +87,7 @@ img {
                       <button class="btn btn-danger btn-block mt-4">Delete</button>
                     </form>
           </div>
-          <% }) %>
+          <%} })}) %>
             <% } else { %>
               <p>No files to show</p>
               <% } %>
@@ -104,8 +108,10 @@ img {
         </form>
     </div>
     <div class="col-md-6 " style="margin-top:10%">
-      <% if(file_hospital){ %>
-          <% file_hospital.forEach(function(file) { %>
+        <% if(files && user_doc){ %>
+          <% files.forEach(function(file) { %>
+            <%user_doc.forEach(function(uc){%>
+              <%if(uc.filename===file.filename && uc.type_of_file==='document'){%>
             <div class="card card-body mb-3">
               <% if(file.isImage) { %>
                 <img src="image/<%= file.filename %>" alt="">
@@ -116,7 +122,7 @@ img {
                         <button class="btn btn-danger btn-block mt-4">Delete</button>
                       </form>
             </div>
-            <% }) %>
+            <%} })}) %>
               <% } else { %>
                 <p>No files to show</p>
                 <% } %>

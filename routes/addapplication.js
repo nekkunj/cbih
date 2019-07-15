@@ -28,4 +28,19 @@ application_one.save().then(user=>{
  })    
  .catch(err=>console.log(err))
 });
+app.get('/showapplication/:email',(req,res)=>{
+application.findOne({email:req.params.email})
+.then(app=>{
+    if(app){
+        res.render('application_information.ejs',{
+            app:app
+        })
+    }
+    else{
+        res.status(404).send('Page Not found');       
+        
+    }
+})
+.catch(err=>{console.log(err)})  
+}) 
 }

@@ -288,7 +288,7 @@ if (validateEmail(sEmail)==false) {
 										<div id="phone_error" class="" style="color:red"></div>
 									<div class="form-group">
 										<label for="phone" class="sr-only">Phone</label>
-										<input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone *" value="">
+										<input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone *" value="<%=user.mobile%>">
 										<small id="phoneHelp" class="form-text text-muted"></small>
 									</div>
 								</div>
@@ -296,7 +296,7 @@ if (validateEmail(sEmail)==false) {
 										<div id="email_error" class="" style="color:red"></div>
 									<div class="form-group">
 										<label for="email" class="sr-only">Email address</label>
-										<input type="text" class="form-control" id="email" name="email" placeholder="Email address *" value="">
+										<input type="text" class="form-control" id="email" name="email" placeholder="Email address *" value="<%=user.email%>">
 										<small id="emailHelp" class="form-text text-muted"></small>
 									</div>
 								</div>

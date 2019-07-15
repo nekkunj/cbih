@@ -5,6 +5,8 @@ const GridFsStorage = require('multer-gridfs-storage');
 const multer=require('multer')
 const crypto = require('crypto');
 const fs=require('fs')
+const application=mongoose.model('application')
+
 const user_document_relation=mongoose.model('userdocumentrelation')
 // Create mongo connection
 const conn = mongoose.createConnection(mongoURI,{ useNewUrlParser: true });
@@ -16,7 +18,7 @@ var temp_email=''
 conn.once('open', () => {
   // Init stream
   gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection('documents');
+  gfs.collection('documents');          
 });
 
 const storage = new GridFsStorage({
@@ -64,28 +66,65 @@ const storage = new GridFsStorage({
       // var file_idcard=[]
       // var file_hospital=[]
        temp_email=req.user.email
-       
+//This code is to ensure user cannot open upload_documents until he is verified
+        application.findOne({email:req.user.email})
+       .then(rop=>{
+         if(!rop){
+           res.redirect('en/online_application')
+         }
+         else if(rop && rop.status==='Application Accepted'){
+          user_document_relation.findOne({email:req.user.email})
+          .then(one=>{
+            if(one){
+              if(one.document_status!='In Progress'){
+          res.redirect('/dashboard')
+            }}
+            else{
+              gfs.files.find().toArray((err, files) => {
+                 
+                // Check if files
+                if (!files || files.length === 0) {
+                  user_document_relation.find({email:req.user.email})
+                  .then(one=>{
+                    if(one){
+                      res.render('upload_documents', { files:false,user_doc:one });
+                    }
+                  })
+                  .catch(err=>{console.log(err)})
+                } else {
+                  files.map(file => {
+                    if (
+                      file.contentType === 'image/jpeg' ||
+                      file.contentType === 'image/png'
+                    ) {
+                      file.isImage = true;
+                    } else {
+                      file.isImage = false;
+                    }
+                  });
+                  user_document_relation.find({email:req.user.email})
+                  .then(one=>{
+                    if(one){
+                      res.render('upload_documents', { files:files,user_doc:one });
+                    }
+                  })
+                  .catch(err=>{console.log(err)})
+                  
+                }
+              });
+            }
+          })
+          .catch(err=>{console.log(err)})
+            
+         }
+         else{
+           res.redirect('/dashboard')
+         }
+       })
+       .catch(err=>{console.log(err)})
 
-  
-    gfs.files.find().toArray((err, files) => {
-       
-      // Check if files
-      if (!files || files.length === 0) {
-        res.render('upload_documents', { file_photo: false,file_idcard: false,file_hospital: false });
-      } else {
-        files.map(file => {
-          if (
-            file.contentType === 'image/jpeg' ||
-            file.contentType === 'image/png'
-          ) {
-            file.isImage = true;
-          } else {
-            file.isImage = false;
-          }
-        });
-        res.render('upload_documents', { file_photo: files,file_idcard: false,file_hospital: false });
-      }
-    });
+
+    
     
   
 
@@ -94,96 +133,7 @@ const storage = new GridFsStorage({
 
        
        
-//         gfs.files.find().toArray((err, files) => {
-          
-//            for(i=0;i<files.length;i++) {
-//             console.log(files[i])
-//              user_document_relation.findOne({filename:files[i].filename})
-//              .then(ele=>{
-//                if(ele){
-//                    console.log(ele.originalfilename)
-//                  if(ele.type_of_file==='photo'){
-//                    file_photo.push(files[i])
-                    
-//                  }
-//                  else if(ele.type_of_file==='idcard'){
-//                   file_idcard.push(files[i])
-//                 }
-//                 else if(ele.type_of_file==='hospital'){
-//                   file_hospital.push(files[i])
-//                 }
-//                 else{
 
-//                 }
-              
-//                }
-//                else{
-// console.log('no file found in user_documents')
-//                }
-//              })
-//              .catch(error=>{
-//                console.log(error)
-//              })
-             
-//             }
-            
-            
-
-           
-
-//           // Check if files
-//           if (  file_photo.length === 0) {
-//             if(!file_idcard || file_idcard.length === 0) {
-//               if(!file_hospital || file_hospital.length === 0) {
-//                 console.log('all null')
-//                 res.render('upload_documents', { file_photo: false,file_idcard:false,file_hospital:false });
-//               }
-//               else{
-//                 console.log('3rd not null')
-//                 file_hospital.map(file => {
-//                   if (
-//                     file.contentType === 'image/jpeg' ||
-//                     file.contentType === 'image/png'
-//                   ) {
-//                     file.isImage = true;
-//                   } else {
-//                     file.isImage = false;
-//                   }
-//                 });
-//             res.render('upload_documents', { file_photo: false,file_idcard:false,file_hospital:file_hospital  });
-
-//               }
-
-//             }
-// else{
-//   file_idcard.map(file => {
-//     if (
-//       file.contentType === 'image/jpeg' ||
-//       file.contentType === 'image/png'
-//     ) {
-//       file.isImage = true;
-//     } else {
-//       file.isImage = false;
-//     }
-//   });
-// res.render('upload_documents', { file_photo: false,file_idcard:file_idcard,file_hospital:file_hospital  });
-
-// }
-            
-//           } else {
-//             files.map(file => {
-//               if (
-//                 file.contentType === 'image/jpeg' ||
-//                 file.contentType === 'image/png'
-//               ) {
-//                 file.isImage = true;
-//               } else {
-//                 file.isImage = false;
-//               }
-//             });
-//             res.render('upload_documents', { file_photo: file_photo,file_idcard:file_idcard,file_hospital:file_hospital });
-//           }
-//         });
       });
 
 
@@ -281,6 +231,8 @@ app.post('/files/:id', (req, res) => {
       res.redirect('/upload_documents');
     });
   });
+
+ 
 app.get('/change_document_status',isLoggedIn,(req,res)=>{
 
   var temp="Processing"
@@ -293,6 +245,48 @@ user_document_relation.updateMany(myquery, newvalues, function(err, res) {
 })
 res.redirect('/dashboard')
 })  
+app.get('/forwardpage/:email',(req,res)=>{
+  var temp;
+  application.findOne({email:req.params.email})
+  .then(app=>{
+      if(app){
+user_document_relation.find({email:req.params.email})
+.then(usdo=>{
+  gfs.files.find().toArray((err, files) => {
+       
+    // Check if files
+    
+    if (!files || files.length === 0) {
+      res.render('patient_information.ejs', { files: false,app:app,user_doc:usdo });
+    } else {
+      files.map(file => {
+        if (
+          file.contentType === 'image/jpeg' ||
+          file.contentType === 'image/png'
+        ) {
+          file.isImage = true;
+        } else {
+          file.isImage = false;
+        }
+      });
+      res.render('patient_information.ejs', { files: files,app:app,user_doc:usdo});
+    }
+  });
+})
+.catch(err=>{console.log(err)})
+      
+
+
+
+          
+      }
+      else{
+          res.status(404).send('Page Not found');       
+          
+      }
+  })
+  .catch(err=>{console.log(err)})  
+  })
   function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
      return next(); 
@@ -303,3 +297,4 @@ res.redirect('/dashboard')
    }
 
   }
+  

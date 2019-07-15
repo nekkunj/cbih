@@ -15,6 +15,7 @@
       Email:em
     })
   }
+ 
   </script>
 </head>
 <body>
@@ -46,7 +47,7 @@
         <% if(app[i].status==='Under review'){%>
         <div class="card" style="width: 20rem;margin:1%">
             <div class="card-body">
-              <h5 class="card-title " style="text-align:center;font-weight:bolder"><%=app[i].name%> <%=app[i].surname%></h5><br>
+              <h5 class="card-title "   style="text-align:center;font-weight:bolder"><a href="/showapplication/<%=app[i].email%>"><%=app[i].name%> <%=app[i].surname%></a></h5><br>
              <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Email:</label>&nbsp; <%=app[i].email%> </span>
              <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Phone number:</label>&nbsp; <%=app[i].phone%> </span>
              <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Complaint type:</label>&nbsp; 
@@ -96,7 +97,7 @@
                <%flag=1%>
         <div class="card" style="width: 20rem;margin:1%">
             <div class="card-body">
-              <h5 class="card-title " style="text-align:center;font-weight:bolder"><%=app[i].name%> <%=app[i].surname%></h5><br>
+              <h5 class="card-title " style="text-align:center;font-weight:bolder"><a href="/forwardpage/<%=app[i].email%>"><%=app[i].name%> <%=app[i].surname%></a></h5><br>
              <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Email:</label>&nbsp; <%=app[i].email%> </span>
              <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Phone number:</label>&nbsp; <%=app[i].phone%> </span>
              <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Complaint type:</label>&nbsp; 

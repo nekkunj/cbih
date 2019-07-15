@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style>
+    img{
+        width:50%;
+    }
+.nav-link{
+    color:red;
+  
+    
+    font-size: 20px;   
+}
+.nav-item:not(#but):hover{
+    border-bottom: red solid 1px;
+}
+.nav-item{
+    margin-right:20px; 
+    padding-bottom: 10px;
+}
+
+#logo{
+    display: block;
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin: 5px 0;
+    margin-right:50px;
+}
+</style>
+ <script >
+        
+        function allowdocument(abc){
+          var em=$(abc).attr('id')
+          $.post('/allow/document',{
+            Email:em
+          })
+        }
+       </script>
+</head>
+<body>
+      <header style="background: rgba(255, 255, 255, 0.8);">  
+           
+                
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" id="logo" href="/"><img src="https://cbih.org/assets/img/cbih.png" alt="Cross Border Irish Health Programme | CBIH" title="Cross Border Irish Health Programme | CBIH">
+                    
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="#" style="color:red">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#" style="color:red">Services</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#" style="color:red">How to Apply</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="#" style="color:red">About Us</a>
+                              </li>
+                              <li class="nav-item">
+                                    <a class="nav-link" href="#" style="color:red">Facts</a>
+                                  </li>
+                                  <li class="nav-item">
+                                        <a class="nav-link" href="#" style="color:red">Contacts</a>
+                                      </li>
+
+                                      <li class="nav-item" id='but'>
+                                            <a class="btn btn-warning  my-2 my-sm-0" href="#">Logout</a>
+                                          </li>
+                                    
+                      </ul>
+                      
+                    </div>
+                  </nav>
+       </header>
+
+<div class="container">
+        <div class="row ">
+                <h3>Personal Information</h3>
+            </div>
+            <br>
+<div class="row">
+        <div class="col-md-6 ">
+                <label>First Name:</label>
+            </div>
+            <div class="col-md-6">
+                <p><%= app.name %></p>
+            </div>
+</div>
+<div class="row">
+        <div class="col-md-6">
+                <label>Last Name:</label>
+            </div>
+            <div class="col-md-6">
+                <p><%= app.surname %></p>
+            </div>
+</div>
+<div class="row">
+        <div class="col-md-6">
+                <label>Email:</label>
+            </div>
+            <div class="col-md-6">
+                <p><%= app.email %></p>
+            </div>
+</div>
+<div class="row">
+        <div class="col-md-6">
+                <label>Phone Number:</label>
+            </div>
+            <div class="col-md-6">
+                <p><%= app.phone %></p>
+            </div>
+</div>
+<div class="row">
+        <div class="col-md-6">
+                <label>Address:</label>
+            </div>
+            <div class="col-md-6">
+                <p><%= app.address %></p>
+            </div>
+</div>
+<div class="row">
+        <div class="col-md-6">
+                <label>Date Of Birth:</label>
+            </div>
+            <div class="col-md-6">
+                <p><%= app.dateofbirth %></p>
+            </div>
+</div>
+<hr>
+<div class="row">
+    <h3>Medical Information</h3>
+</div>
+<br>
+<div class="row">
+        <div class="col-md-6">
+                <label>GP name:</label>
+            </div>
+            <div class="col-md-6">
+                <p><%= app.gpname %></p>
+            </div>
+</div>
+
+<div class="row">
+        <div class="col-md-6">
+                <label>GP Phone number:</label>
+            </div>
+            <div class="col-md-6">
+                <p><%= app.gpphone %></p>
+            </div>
+</div>
+<div class="row">
+        <div class="col-md-6">
+                <label>Medical Center:</label>
+            </div>
+            <div class="col-md-6">
+                <%if(app.medical_center===''){%>
+                <p>Not given</p>
+                    <%} else{%>
+                <p><%= app.medical_center %></p>
+                <%}%>
+            </div>
+</div>
+<div class="row">
+        <div class="col-md-6">
+                <label>Medical Center Phone Number:</label>
+            </div>
+            <div class="col-md-6">
+                    <%if(app.medical_center===''){%>
+                        <p>Not given</p>
+                            <%} else{%>
+                                <p><%= app.medical_center_phone %></p>
+                        <%}%>
+                
+            </div>
+</div>
+<div class="row">
+        <div class="col-md-6">
+                <label>Hospital:</label>
+            </div>
+            <div class="col-md-6">
+                    <%if(app.medical_center===''){%>
+                        <p>Not given</p>
+                            <%} else{%>
+                                <p><%= app.hospital %></p>
+                        <%}%>
+                
+            </div>
+</div>
+<div class="row">
+        <div class="col-md-6">
+                <label>Hospital Phone Number:</label>
+            </div>
+            <div class="col-md-6">
+                    <%if(app.medical_center===''){%>
+                        <p>Not given</p>
+                            <%} else{%>
+                                <p><%= app.hospital_phone%></p>
+                        <%}%>
+                
+            </div>
+</div>
+<div class="row">
+        <div class="col-md-6">
+            <label>Complaint Type</label>
+        </div>
+        <div class="col-md-6">
+                                                        
+                <%if(app.complaint_nature==1){%>
+                    <p>Hip Replacement</p>
+                    <%} else if(app.complaint_nature==2){%>
+                    <p>Cataracts</p>
+                    <%} else if(app.complaint_nature==3){%>
+                        <p>Knee Replacement</p>
+                    <%} else{%>
+                        <p>Others</p>
+
+                    <%}%>
+</div>
+    </div>
+    <div class="row">
+            <div class="col-md-6">
+                    <label>Message</label>
+                </div>
+                <div class="col-md-6">
+                        <%if(app.medical_center===''){%>
+                            <p>Not given</p>
+                                <%} else{%>
+                                    <p><%= app.message%></p>
+                            <%}%>
+                    
+                </div>
+    </div>
+    <!-- <div class="col-md-6" style="align-items: center" >
+    <a class="btn btn-success" onclick="allow(this)" id="<%=app.email%>"> Accept</a>
+    <a class="btn btn-warning">Reject</a>
+    </div> -->
+    <hr>
+    <div class="row">
+            <h3>Documents</h3>
+        </div><br>
+    <div class="row">
+            <% if(files && user_doc){ %>
+                <% files.forEach(function(file) { %>
+                    <%user_doc.forEach(function(uc){%>
+                        <%if(uc.filename===file.filename){%>
+                  <div class="mb-3 ">
+                    <% if(file.isImage) { %>
+                        <a href="/image/<%= file.filename%>">
+                      <img src="/image/<%= file.filename%>"  alt="<%=file.filename%>"></a>
+                      <% } else { %>
+                        <a href="/files/<%= file.filename%>">Open File</a>
+                          <% } %>
+                            
+                  </div>
+                  <%}})})%>
+                    <% } else { %>
+                      <p>No files to show</p>
+                      <% } %>
+                 </div>
+                 <div class="col-md-6 ml-auto" style="align-items: center" >
+                        <a class="btn btn-lg btn-success" onclick="allowdocument(this)" id="<%=app.email%>"> Allow</a>
+                        <a class="btn btn-warning btn-lg">Reject</a>
+                        </div>
+</div>
+<br><br>
+
+</body>
+</html>
