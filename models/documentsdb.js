@@ -62,9 +62,6 @@ const storage = new GridFsStorage({
   module.exports=function(app,passport){
 
     app.get('/upload_documents',isLoggedIn, (req, res) => {
-      var file_photo=[]
-      // var file_idcard=[]
-      // var file_hospital=[]
        temp_email=req.user.email
 //This code is to ensure user cannot open upload_documents until he is verified
         application.findOne({email:req.user.email})
@@ -75,10 +72,9 @@ const storage = new GridFsStorage({
          else if(rop && rop.status==='Application Accepted'){
           user_document_relation.findOne({email:req.user.email})
           .then(one=>{
-            if(one){
-              if(one.document_status!='In Progress'){
+            if(one && one.document_status!='In Progress' ){
           res.redirect('/dashboard')
-            }}
+            }
             else{
               gfs.files.find().toArray((err, files) => {
                  
@@ -135,6 +131,22 @@ const storage = new GridFsStorage({
        
 
       });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

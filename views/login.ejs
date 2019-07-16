@@ -97,7 +97,7 @@
                     <div class="alert alert-danger"><%= message %></div> 
                    <% } %>
                    <% if(success_msg!=''){%>
-                    <div class="alert alert-danger"><%= success_msg %></div> 
+                    <div class="alert alert-success"><%= success_msg %></div> 
                    <%}%>
 				<form action="/login" method="POST">
 					<label>Email Address</label>
@@ -116,7 +116,9 @@
 						<button class="btn btn-danger btn-block" type="submit">Login</button >                
 				</form>
 				<p class="account">By clicking login, you agree to our <a href="#">Terms & Conditions!</a></p>
-				<p class="account1">Dont have an account? <a href="/sign_up">Register here</a></p>
+                <p class="account1">Dont have an account? <a href="/sign_up">Register here</a></p>
+				<p class="account1">Forgot password <a href="/sign_up">Click here</a></p>
+                
 			</div>
 		</div>
 	

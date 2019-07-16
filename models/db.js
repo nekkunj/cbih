@@ -7,4 +7,6 @@ mongoose.connect('mongodb://localhost:27017/userlogin',{useNewUrlParser:true},(e
 require('./user.model');
 require('./application.model')
 require('./user_document_relation.model')
+require('./forgot_links.model')
+
 
