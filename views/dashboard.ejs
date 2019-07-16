@@ -244,20 +244,33 @@ function resethash(){
                                                 <p><%=app.status%></p>
                                             </div>
                                         </div>
+                                        <%if(app.status==='Rejected'){%>
+                                            <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>Refill Application form</label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                            <p><a href="/refill_applicationform/<%=app.email%>">Click here</a></p>
+                                                        
+                                                    </div>
+                                                </div>
+                                                
+                                        <%}%>
                                         <%if(app.status==="Application Accepted"){%>
+                                            <%if((user_doc && user_doc.document_status!="Rejected") || !user_doc){%>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                        <%if(user_doc && user_doc.document_status!="In Progress"){%>
+                                                        <%if(user_doc && user_doc.document_status!="In Progress" ){%>
                                                     <label>Edit Documenets</label>
                                                             <%} else{%>
                                                     <label>Upload Documenets</label>
-                                                    <%}%>
+                                                    <%} %>
                                                 </div>
                                                 <div class="col-md-6">
                                                         <p><a href="/upload_documents">Click here</a></p>
                                                     </div>
                                             </div>
-                                           
+                                         <%}%>
                                         <%if(user_doc && (user_doc.document_status!="In Progress" || user_doc.document_status!="" || user_doc.document_status!='undefined')){%>
 
                                             <div class="row">
@@ -270,6 +283,20 @@ function resethash(){
                                                 </div>
                                             <%}%>
                                             <%}%>
+                                                <%if(user_doc && user_doc.document_status==="Rejected"){%>
+                                                    <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Reupload Documents</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                        <p><a href="/upload_documents">Click here</a></p>
+                                                                   
+                                                                </div>
+                                                        </div>
+                                                <%}%>
+
+
+
                                         </div>
                                         
                             </div>

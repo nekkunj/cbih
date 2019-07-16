@@ -28,6 +28,10 @@ var userschema=new mongoose.Schema({
     },
     active:{
         type:Boolean
+    },
+    type:{
+        type:String,
+        default:"user"
     }
         
     

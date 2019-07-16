@@ -253,9 +253,9 @@ users.findOne({secretkey:req.body.secretToken})
    abc.active=true;
    abc.secretkey=""
  abc.save()
-   .then(us=>{
-  req.flash('success_msg','Email verified,now login')
-  res.redirect('/login')
+   .then(us=>{if(us){  req.flash('success_msg','Email verified,now login')
+   res.redirect('/login')}
+
    })
    .catch(err=>{console.log(err)})
 })
@@ -390,6 +390,9 @@ users.findOne({email:req.params.email})
 
     function isLoggedIn(req, res, next){
       if(req.isAuthenticated()){
+         if(req.user.type==='server'){
+            res.redirect('/backend')
+         }
        return next(); 
       }
       else{
@@ -398,13 +401,21 @@ users.findOne({email:req.params.email})
      }
      function isnotloggedin(req, res, next){
       if(!req.isAuthenticated()){
+
        return next(); 
       }
       else{
       res.redirect('/dashboard');
       }
      }
-     
+     function isAdmin(req, res, next){
+      if(req.isAuthenticated() && req.user.type==='server'){
+       return next(); 
+      }
+      else{
+      res.redirect('/login');
+      }
+     }
 
 
     };

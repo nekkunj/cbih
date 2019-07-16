@@ -44,6 +44,11 @@
             Email:em
           })
         }
+        function reject(abc){
+            $.post('/reject',{
+                Email:$(abc).attr('id')
+            })
+        }
        </script>
 </head>
 <body>
@@ -248,7 +253,7 @@
     </div>
     <div class="col-md-6" style="align-items: center" >
     <a class="btn btn-success btn-lg" onclick="allow(this)" id="<%=app.email%>"> Accept</a>
-    <a class="btn btn-warning btn-lg">Reject</a>
+    <a class="btn btn-warning btn-lg" onclick="reject(this)" id="<%=app.email%>">Reject</a>
     </div>
    
 </div>

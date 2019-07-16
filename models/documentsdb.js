@@ -165,7 +165,7 @@ res.redirect('/upload_documents');
 })
 
 
-app.get('/files', (req, res) => {
+app.get('/files',isAdmin, (req, res) => {
     gfs.files.find().toArray((err, files) => {
       // Check if files
       if (!files || files.length === 0) {
@@ -181,7 +181,7 @@ app.get('/files', (req, res) => {
   
 // @route GET /files/:filename
 // @desc  Display single file object
-app.get('/files/:filename', (req, res) => {
+app.get('/files/:filename',isLoggedIn, (req, res) => {
     gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
       // Check if file
       if (!file || file.length === 0) {
@@ -209,7 +209,7 @@ app.get('/files/:filename', (req, res) => {
 
 // @route GET /image/:filename
 // @desc Display Image
-app.get('/image/:filename', (req, res) => {
+app.get('/image/:filename',isLoggedIn, (req, res) => {
     gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
       // Check if file
       if (!file || file.length === 0) {
@@ -234,7 +234,7 @@ if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
 
 // @route DELETE /files/:id
 // @desc  Delete file
-app.post('/files/:id', (req, res) => {
+app.post('/files/:id',isAdmin,(req, res) => {
     gfs.remove({ _id: req.params.id, root: 'documents' }, (err, gridStore) => {
       if (err) {
         return res.status(404).json({ err: err });
@@ -256,8 +256,8 @@ user_document_relation.updateMany(myquery, newvalues, function(err, res) {
   
 })
 res.redirect('/dashboard')
-})  
-app.get('/forwardpage/:email',(req,res)=>{
+})    
+app.get('/forwardpage/:email',isAdmin,(req,res)=>{
   var temp;
   application.findOne({email:req.params.email})
   .then(app=>{
@@ -299,9 +299,41 @@ user_document_relation.find({email:req.params.email})
   })
   .catch(err=>{console.log(err)})  
   })
-  
+  app.get('/refill_applicationform/:email',isLoggedIn,(req,res)=>{
+application.deleteOne({email:req.params.email})
+.then(suc=>{
+  res.redirect('/en/online_application')
+})
+.catch(err=>{console.log(err)})
+  })
+
+// app.get('/reupload_documents/:email',isLoggedIn,(req,res)=>{
+//  user_document_relation.deleteMany({email:req.params.email})
+//  .then((data)=>{
+//    if(data){
+// for(d in data){
+// documents.deleteOne({})
+// }
+//    }
+//  })
+//  .catch(err =>{console.log(err)})
+// })
+
+
+
   function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
+      //  if(req.user.type==='server'){
+      //     res.redirect('/backend')
+      //  }
+     return next(); 
+    }
+    else{
+    res.redirect('/login');
+    }
+   }
+   function isAdmin(req, res, next){
+    if(req.isAuthenticated() && req.user.type==='server'){
      return next(); 
     }
     else{

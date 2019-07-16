@@ -6,8 +6,8 @@ const user_document_relation=mongoose.model('userdocumentrelation')
 
 
 
-module.exports = function(app) {
-app.get('/backend',(req,res)=>{
+module.exports = function(app,passport) {
+app.get('/backend',isAdmin,(req,res)=>{
 
     var temp="Under review"
     application.find()
@@ -29,5 +29,12 @@ user_document_relation.find()
     .catch(err=>{console.log(err)})
     
 })
-
+function isAdmin(req, res, next){
+    if(req.isAuthenticated() && req.user.type==='server'){
+     return next(); 
+    }
+    else{
+    res.redirect('/login');
+    }
+   }
 }

@@ -56,8 +56,9 @@ app.use((req,res,next)=>{
 })
 require('./api/index.js')(app,passport);
 require('./models/documentsdb')(app,passport)
+require('./api/server_application_varifier.js')(app,passport)
 require('./routes/addapplication.js')(app);
-require('./api/server_application_varifier.js')(app)
+
 // require('./api/documents.js')(app);
 
 
@@ -77,6 +78,8 @@ app.use('/en/about_us',express.static(__dirname+"/public_static/about_us.html"))
 
 
  app.use('/allow',require('./routes/allow.js').route)
+ app.use('/reject',require('./routes/reject.js').route)
+
 //  app.use('/allow',require('./routes/change_document_status.js').route)
 
 
