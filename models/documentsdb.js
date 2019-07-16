@@ -287,6 +287,7 @@ user_document_relation.find({email:req.params.email})
   })
   .catch(err=>{console.log(err)})  
   })
+  
   function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
      return next(); 

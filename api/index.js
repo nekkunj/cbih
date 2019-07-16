@@ -7,21 +7,13 @@ const application=mongoose.model('application')
 // var flash=require("connect-flash");
 // app.use(flash());
 const mailer = require('express-mailer');
+const nodeMailer = require('nodemailer');
+
 
 const randomstring =require('randomstring')
 const user_document_relation=mongoose.model('userdocumentrelation')
 
-mailer.extend(app, {
-   from: 'nekkunjpilani@gmail.com',
-   host: 'smtp.gmail.com', // hostname
-   secureConnection: true, // use SSL
-   port: 465, // port for secure SMTP
-   transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
-   auth: {
-     user: 'nekkunjpilani@gmail.com',
-     pass: 'nikunj24'
-   }
- });
+
 module.exports = function(app,passport) {
     app.get('/login',isnotloggedin, function(req, res){
       res.render('login.ejs',{message:req.flash('loginMessage')});
@@ -29,7 +21,6 @@ module.exports = function(app,passport) {
      app.get('/sign_up',isnotloggedin, function(req, res){
         res.render('signup.ejs');
        });
-
 
 app.post('/login',
    passport.authenticate('local', {
@@ -110,7 +101,7 @@ else{
                user_one.password=req.body.Password
                const secrettoken=randomstring.generate()
               
-               user_one.randomstring=secrettoken
+               user_one.secretkey=secrettoken
                user_one.active=false
                bcrypt.genSalt(10,(err,salt)=>{
                  bcrypt.hash(user_one.password,salt,(err,hash)=>{
@@ -123,7 +114,51 @@ else{
                 
                   // req.flash('success_msg','signup successful,now login')
                   // res.redirect('/login')
-                  res.redirect('/verify')
+
+//send email
+
+let transporter = nodeMailer.createTransport({
+   host: 'smtp.gmail.com',
+   port: 465,
+   secure: true,
+   auth: {
+       // should be replaced with real sender's account
+       user: 'nekkunjpilani@gmail.com',
+       pass: 'nikunj24'
+   }
+});
+const html=`
+     
+Hi there,
+<br/>
+Thank you for registering !
+<br/><br/>
+Please verify your email by typing the following token :
+<br/>
+Token: <b>${secrettoken}</b>
+<br/>
+On the following page:
+<a href="http://localhost:7007/verify">http://localhost:7007/verify</a>
+<br/><br/>
+Have a pleasant day!
+
+`
+let mailOptions = {
+   // should be replaced with real recipient's account
+   to: req.body.Email,
+   subject: 'yoyo',
+   html:html,
+   text:html
+};
+transporter.sendMail(mailOptions, (error, info) => {
+   if (error) {
+       return console.log(error);
+   }
+   console.log('Message %s sent: %s', info.messageId, info.response);
+   res.redirect('/verify')
+});
+
+    
                   
                })    
                .catch(err=>console.log(err))
@@ -197,29 +232,37 @@ else{
    })
 
    app.get('/verify', function(req,res){
-      res.render('verify')
-     })
-app.get('/send_email', function (req, res, next) {
-    app.mailer.send('email', {
-      to: 'aggarwalyash309@gmail.com', // REQUIRED. This can be a comma delimited string just like a normal email to field. 
-      subject: 'Test Email', // REQUIRED.
-      otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
-    }, function (err) {
-      if (err) {
-        // handle error
-        console.log(err);
-        res.send('There was an error sending the email');
-        return;
+      if(!req.isAuthenticated()){
+      res.render('verify')}
+      else{
+         res.redirect('/login')
       }
-      res.send('Email Sent');
-    });
-  });
+     })
+
+
 
    app.get('/logout', function(req,res){
       req.logout();
       res.redirect('/');
      })
-     
+     app.post('/verify', (req,res)=>{
+users.findOne({secretkey:req.body.secretToken})
+.then(abc=>{
+   if(!abc){
+      req.flash('error_msg','Incorrect verification code')
+      res.redirect('/verify')
+   }
+   abc.active=true;
+   abc.secretkey=""
+ abc.save()
+   .then(us=>{
+  req.flash('success_msg','Email verified,now login')
+  res.redirect('/login')
+   })
+   .catch(err=>{console.log(err)})
+})
+.catch(err=>{console.log(err)})
+     })
     function isLoggedIn(req, res, next){
       if(req.isAuthenticated()){
        return next(); 

@@ -28,12 +28,18 @@ passport.use(
                 return done(null,false,req.flash('loginMessage','That email is not registered'));
              
             }
+
             console.log('find user')
             bcrypt.compare(password,user.password,(err,isMatch)=>{
 if(err) throw err;
 
 if(isMatch){
+    if(!user.active){
+        console.log('Email not verified')
+        return done(null,false,req.flash('loginMessage','The email is not verified'));
+    }
     console.log('login successful')
+    
     return done(null,user);
 }   else{
     console.log('password wrong')
