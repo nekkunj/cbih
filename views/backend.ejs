@@ -21,23 +21,25 @@
 <body>
 <br>
 
-<div class="container">
-  <h2>Toggleable Tabs</h2>
+<div class="container ">
+  <span>
+  <h2 style="display:inline">Welcome <%=user.fullname%></h2>
+  <a class="mr-0 btn btn-lg btn-warning" style="float:right" data-toggle="tab" href="/logout">Logout</a>
+</span>  
+<br>
   <br>
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
+  <ul class="nav nav-tabs bg-light" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+      <a class="nav-link active" data-toggle="tab" href="#home">Verify</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+      <a class="nav-link" data-toggle="tab" href="#menu1">Documents</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+      <a class="nav-link" data-toggle="tab" href="#menu2">Final records</a>
     </li>
-    <li class="nav-item" style="">
-        <a class="mr-0 btn btn-warning" data-toggle="tab" href="/logout">Logout</a>
-      </li>
+   
   </ul>
 
   <!-- Tab panes -->
@@ -71,7 +73,7 @@
 
 <br>
 <br>  
-              <a href="#" class="btn btn-primary" >Full details</a>
+              <a href='/showapplication/<%=app[i].email%>'  class="btn btn-primary" >Full details</a>
               <a onclick="allow(this)" id="<%=app[i].email%>" class="btn btn-success" style="float:right">Allow</a>
 
             </div>
@@ -121,7 +123,7 @@
 
 <br>
 <br>  
-              <a href="#" class="btn btn-primary" >Full details</a>
+              <a href="/forwardpage/<%=app[i].email%>" class="btn btn-primary" >Full details</a>
               <a onclick="allow(this)" id="<%=app[i].email%>" class="btn btn-success" style="float:right">Allow</a>
 
             </div>
@@ -136,7 +138,7 @@
     </div>
     <div id="menu2" class="container tab-pane fade"><br>
       <h3>final</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+     
     </div>
   </div>
 </div>

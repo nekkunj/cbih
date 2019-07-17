@@ -103,7 +103,7 @@
         <div class="col-md-6 ">
                 <label>First Name:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-primary">
                 <p><%= app.name %></p>
             </div>
 </div>
@@ -111,7 +111,7 @@
         <div class="col-md-6">
                 <label>Last Name:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-primary">
                 <p><%= app.surname %></p>
             </div>
 </div>
@@ -119,7 +119,7 @@
         <div class="col-md-6">
                 <label>Email:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-primary">
                 <p><%= app.email %></p>
             </div>
 </div>
@@ -127,7 +127,7 @@
         <div class="col-md-6">
                 <label>Phone Number:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6  text-primary">
                 <p><%= app.phone %></p>
             </div>
 </div>
@@ -135,7 +135,7 @@
         <div class="col-md-6">
                 <label>Address:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-primary">
                 <p><%= app.address %></p>
             </div>
 </div>
@@ -143,10 +143,11 @@
         <div class="col-md-6">
                 <label>Date Of Birth:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-primary">
                 <p><%= app.dateofbirth %></p>
             </div>
 </div>
+
 <hr>
 <div class="row">
     <h3>Medical Information</h3>
@@ -156,7 +157,7 @@
         <div class="col-md-6">
                 <label>GP name:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-primary">
                 <p><%= app.gpname %></p>
             </div>
 </div>
@@ -165,7 +166,7 @@
         <div class="col-md-6">
                 <label>GP Phone number:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-primary">
                 <p><%= app.gpphone %></p>
             </div>
 </div>
@@ -173,7 +174,7 @@
         <div class="col-md-6">
                 <label>Medical Center:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-primary">
                 <%if(app.medical_center===''){%>
                 <p>Not given</p>
                     <%} else{%>
@@ -185,7 +186,7 @@
         <div class="col-md-6">
                 <label>Medical Center Phone Number:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-primary">
                     <%if(app.medical_center===''){%>
                         <p>Not given</p>
                             <%} else{%>
@@ -198,7 +199,7 @@
         <div class="col-md-6">
                 <label>Hospital:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-primary">
                     <%if(app.hospital===''){%>
                         <p>Not given</p>
                             <%} else{%>
@@ -211,7 +212,7 @@
         <div class="col-md-6">
                 <label>Hospital Phone Number:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-primary">
                     <%if(app.hospital_phone===''){%>
                         <p>Not given</p>
                             <%} else{%>
@@ -224,7 +225,7 @@
         <div class="col-md-6">
             <label>Complaint Type</label>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 text-primary">
                                                         
                 <%if(app.complaint_nature==1){%>
                     <p>Hip Replacement</p>
@@ -242,7 +243,7 @@
             <div class="col-md-6">
                     <label>Message</label>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 text-primary">
                         <%if(app.message===''){%>
                             <p>Not given</p>
                                 <%} else{%>

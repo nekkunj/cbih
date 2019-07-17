@@ -234,7 +234,7 @@ if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
 
 // @route DELETE /files/:id
 // @desc  Delete file
-app.post('/files/:id',isAdmin,(req, res) => {
+app.post('/files/:id',isLoggedIn,(req, res) => {
     gfs.remove({ _id: req.params.id, root: 'documents' }, (err, gridStore) => {
       if (err) {
         return res.status(404).json({ err: err });
@@ -257,6 +257,22 @@ user_document_relation.updateMany(myquery, newvalues, function(err, res) {
 })
 res.redirect('/dashboard')
 })    
+app.get('/showapplication/:email',isAdmin,(req,res)=>{
+  application.findOne({email:req.params.email})
+  .then(app=>{
+      if(app){
+          res.render('application_information.ejs',{
+              app:app
+          })
+      }
+      else{
+          res.status(404).send('Page Not found');       
+          
+      }
+  })
+  .catch(err=>{console.log(err)})  
+  })
+
 app.get('/forwardpage/:email',isAdmin,(req,res)=>{
   var temp;
   application.findOne({email:req.params.email})

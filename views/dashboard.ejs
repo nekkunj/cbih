@@ -30,8 +30,72 @@ function resethash(){
 
 
 </script>
+<style>
+.navlinks{
+    color:red;
+  
+    
+    font-size: 20px;   
+}
+.navitems:hover{
+    border-bottom: red solid 1px;
+}
+.navitems{
+    margin-right:20px; 
+    padding-bottom: 10px;
+}
+
+#logo{
+    display: block;
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin: 5px 0;
+    margin-right:50px;
+}</style>
 </head>
 <body>
+        <header style="background: rgba(255, 255, 255, 0.8);">  
+           
+                
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <a class="navbar-brand" id="logo" href="/"><img src="https://cbih.org/assets/img/cbih.png" alt="Cross Border Irish Health Programme | CBIH" title="Cross Border Irish Health Programme | CBIH">
+                        
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                      
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li class="nav-item navitems active">
+                              <a class="nav-link navlinks" href="#" style="color:red">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item  navitems ">
+                              <a class="nav-link navlinks" href="#" style="color:red">Services</a>
+                            </li>
+                            <li class="nav-item navitems ">
+                              <a class="nav-link navlinks" href="#" style="color:red">How to Apply</a>
+                            </li>
+                            <li class="nav-item  navitems ">
+                                    <a class="nav-link navlinks" href="#" style="color:red">About Us</a>
+                                  </li>
+                                  <li class="nav-item navitems ">
+                                        <a class="nav-link navlinks" href="#" style="color:red">Facts</a>
+                                      </li>
+                                      <li class="nav-item navitems ">
+                                            <a class="nav-link navlinks" href="#" style="color:red">Contacts</a>
+                                          </li>
+    
+                                          <li class="nav-item  " id='but'>
+                                                <a class="btn btn-warning  my-2 my-sm-0" href="#">Logout</a>
+                                              </li>
+                                        
+                          </ul>
+                          
+                        </div>
+                      </nav>
+           </header>
 <br><br>
 
 <div class="container emp-profile">
@@ -51,10 +115,8 @@ function resethash(){
                                     <h5>
                                       <%=user.fullname%>
                                     </h5>
-                                    <h6>
-                                        Web Developer and Designer
-                                    </h6>
-                                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                                    
+                                    
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"  role="tab" aria-controls="home" aria-selected="true">About</a>

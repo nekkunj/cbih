@@ -12,67 +12,140 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 img {
-      width: 100%;
+      width:50%;
+      /* border:1px solid lightgray; */
+      align-self: center
     }
 </style>
 <script src="upload_documents.js">
   </script>
-
+ <style>
+  .navlinks{
+      color:red;
+    
+      
+      font-size: 20px;   
+  }
+  .navitems:hover{
+      border-bottom: red solid 1px;
+  }
+  .navitems{
+      margin-right:20px; 
+      padding-bottom: 10px;
+  }
+  
+  #logo{
+      display: block;
+      float: left;
+      width: 100px;
+      height: 100px;
+      margin: 5px 0;
+      margin-right:50px;
+  }</style>
 </head>
-<body>
-    <div class="container">
+<body background="https://media.istockphoto.com/photos/abstract-color-rainbow-ray-light-background-color-light-disco-picture-id967495074">
+  <header style="">  
+           
+                
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" id="logo" href="/"><img src="https://cbih.org/assets/img/cbih.png" alt="Cross Border Irish Health Programme | CBIH" title="Cross Border Irish Health Programme | CBIH">
+            
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item navitems active">
+                  <a class="nav-link navlinks" href="#" style="color:red">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item  navitems ">
+                  <a class="nav-link navlinks" href="#" style="color:red">Services</a>
+                </li>
+                <li class="nav-item navitems ">
+                  <a class="nav-link navlinks" href="#" style="color:red">How to Apply</a>
+                </li>
+                <li class="nav-item  navitems ">
+                        <a class="nav-link navlinks" href="#" style="color:red">About Us</a>
+                      </li>
+                      <li class="nav-item navitems ">
+                            <a class="nav-link navlinks" href="#" style="color:red">Facts</a>
+                          </li>
+                          <li class="nav-item navitems ">
+                                <a class="nav-link navlinks" href="#" style="color:red">Contacts</a>
+                              </li>
+
+                              <li class="nav-item  " id='but'>
+                                    <a class="btn btn-warning  my-2 my-sm-0" href="#">Logout</a>
+                                  </li>
+                            
+              </ul>
+              
+            </div>
+          </nav>
+</header>
+      <br>
+    <div class="container   mb-4 p-2" style="background-color:white;border: solid 1px silver;border-radius: 2%">
         <div class="row">
-        <div class="col-md-6 " id="formone">
+        <span class="col-md-6 mb-1" id="formone">
             <h2 class="  my-4">Upload Photo</h2>
        <form action="/documents/photo" method="post" enctype="multipart/form-data" > 
         <div id="form1_div"></div>
        
         <div class="custom-file mb-3">
       
-    <input type="file" name="file" id="file" class="custom-file-input">
+    <input type="file" name="file" id="file" class="custom-file-input photoid" accept="image/x-png,image/gif,image/jpeg">
+    <div id="photowarning" style="color:red"></div>  
     <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
     
     </div>
-    <input type="submit" value="Upload" class="btn btn-success btn-block">
+    <input type="submit" value="Upload" id="photoupload" class="btn btn-success btn-block">
     </form>
-    <hr>
-        </div>
-        <div class="col-md-6 " style="margin-top:10%">
+    
+  </span>
+  <span class="col-md-1"></span>
+
+        <span class="col-md-3 col-sm-6" >
     <% if(files && user_doc){ %>
         <% files.forEach(function(file) { %>
           <%user_doc.forEach(function(uc){%>
             <%if(uc.filename===file.filename && uc.type_of_file==='photo'){%>
-          <div class="card card-body mb-3">
+          <div class="card card-body " >
             <% if(file.isImage) { %>
               <img src="image/<%= file.filename %>" alt="">
               <% } else { %>
-                <a href="files/<%= file.filename %>">Download File</a>
+                <a href="files/<%= file.filename %>"><%=uc.originalfilename%></a>
                   <% } %>
-                    <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
-                      <button class="btn btn-danger btn-block mt-4">Delete</button>
+                    <form method="POST" action="/files/<%= file._id %>?_method=DELETE" >
+                      <button class="btn btn-danger btn-block mt-4"> Delete</button>
                     </form>
           </div>
           <%} })}) %>
             <% } else { %>
               <p>No files to show</p>
               <% } %>
-         </div>
+        </span>
     </div>
+    <hr>
 <div class="row">
-  <div class="col-md-6"  id="form2">
+  <span class="col-md-6 mb-1"  id="form2">
     <h2 class="my-4">Upload identification Card</h2>
     <form action="/documents/idcard" method="post" enctype="multipart/form-data">
       <div id="form2_div"></div>
 
       <div class="custom-file mb-3">
         
-      <input type="file" name="file" id="file" class="custom-file-input" accept="image/x-png,image/gif,image/jpeg">
+      <input type="file" name="file" id="file" class="custom-file-input idcardid" accept="image/x-png,image/gif,image/jpeg">
+    <div id="idcardwarning" style="color:red"></div>  
+
       <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
       </div>
-      <input type="submit" value="Upload" class="btn btn-success btn-block">
+      <input type="submit" value="Upload" id="idcardupload" class="btn btn-success btn-block">
       </form>
-  </div>
-  <div class="col-md-6 " style="margin-top:10%">
+  </span>
+  <span class="col-md-1"></span>
+  <span class="col-md-3 col-sm-6" >
       <% if(files && user_doc){ %>
         <% files.forEach(function(file) { %>
           <%user_doc.forEach(function(uc){%>
@@ -81,7 +154,7 @@ img {
             <% if(file.isImage) { %>
               <img src="image/<%= file.filename %>" alt="">
               <% } else { %>
-                <a href="files/<%= file.filename %>">Download File</a>
+                <a href="files/<%= file.filename %>"><%=uc.originalfilename%></a>
                   <% } %>
                     <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
                       <button class="btn btn-danger btn-block mt-4">Delete</button>
@@ -91,34 +164,39 @@ img {
             <% } else { %>
               <p>No files to show</p>
               <% } %>
-         </div>
+  </span>
 </div>
+<hr>
 <div class="row">
-    <div class="col-md-6" id="form3">
+    <spam class="col-md-6 mb-1" id="form3">
       <h2 class="my-4">Upload hospital documents</h2>
       <form action="/documents/hospital" method="post" enctype="multipart/form-data" >
 
         <div id="form3_div"></div>
         <div class="custom-file mb-3">
           
-        <input type="file" name="file" id="file" class="custom-file-input">
+        <input type="file" name="file"  id="file" class="custom-file-input hospitalid" accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+    <div id="hospitalwarning" style="color:red"></div>  
+
         <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
         </div>
-        <input type="submit" value="Upload" class="btn btn-success btn-block">
+        <input type="submit" value="Upload" id="hospitalupload" class="btn btn-success btn-block" >
         </form>
-    </div>
-    <div class="col-md-6 " style="margin-top:10%">
+    </spam>
+  <span class="col-md-1"></span>
+
+    <span class="col-md-3 col-sm-6">
         <% if(files && user_doc){ %>
           <% files.forEach(function(file) { %>
             <%user_doc.forEach(function(uc){%>
-              <%if(uc.filename===file.filename && uc.type_of_file==='document'){%>
+              <%if(uc.filename===file.filename && uc.type_of_file==='hospital'){%>
             <div class="card card-body mb-3">
               <% if(file.isImage) { %>
                 <img src="image/<%= file.filename %>" alt="">
                 <% } else { %>
-                  <a href="files/<%= file.filename %>">Download File</a>
+                  <a href="files/<%= file.filename %>"><%=uc.originalfilename%></a>
                     <% } %>
-                      <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                      <form method="POST" action="/files/<%= file._id %>?_method=DELETE" >
                         <button class="btn btn-danger btn-block mt-4">Delete</button>
                       </form>
             </div>
@@ -126,7 +204,7 @@ img {
               <% } else { %>
                 <p>No files to show</p>
                 <% } %>
-           </div>
+    </span>
   </div>
 
 

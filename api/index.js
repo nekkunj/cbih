@@ -97,7 +97,7 @@ else{
                user_one.dateofbirth=req.body.Birthdate
                user_one.gender=req.body.gender
                user_one.password=req.body.Password
-               const secrettoken=randomstring.generate()
+               const secrettoken=randomstring.generate(7)
               
                user_one.secretkey=secrettoken
                user_one.active=false
