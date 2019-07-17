@@ -66,26 +66,26 @@
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
-                          <a class="nav-link" href="#" style="color:red">Home <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="/" style="color:red">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#" style="color:red">Services</a>
+                          <a class="nav-link" href="/en/cross_border_health" style="color:red">Services</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#" style="color:red">How to Apply</a>
+                          <a class="nav-link" href="/en/application" style="color:red">How to Apply</a>
                         </li>
                         <li class="nav-item">
-                                <a class="nav-link" href="#" style="color:red">About Us</a>
+                                <a class="nav-link" href="/en/about_us" style="color:red">About Us</a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="#" style="color:red">Facts</a>
+                                    <a class="nav-link" href="/en/faqs" style="color:red">Faqs</a>
                                   </li>
                                   <li class="nav-item">
-                                        <a class="nav-link" href="#" style="color:red">Contacts</a>
+                                        <a class="nav-link" href="/en/contact_us" style="color:red">Contacts</a>
                                       </li>
 
                                       <li class="nav-item" id='but'>
-                                            <a class="btn btn-warning  my-2 my-sm-0" href="#">Logout</a>
+                                            <a class="btn btn-warning  my-2 my-sm-0" href="/logout">Logout</a>
                                           </li>
                                     
                       </ul>
@@ -252,9 +252,17 @@
                     
                 </div>
     </div>
-    <div class="col-md-6" style="align-items: center" >
+    <div class="col-md-6" style="align-items: center">
+        <%if(app.status==='Application Accepted'){%>
+            <a class="btn btn-dark btn-lg text-light"  id="<%=app.email%>" > Accept</a>
+        <%}else{%>
     <a class="btn btn-success btn-lg" onclick="allow(this)" id="<%=app.email%>"> Accept</a>
+    <%}%>
+    <%if(app.status==='Rejected'){%>
+    <a class="btn btn-warning btn-lg" onclick="reject(this)" id="<%=app.email%>" aria-disabled="true">Reject</a>
+    <%}else{%>
     <a class="btn btn-warning btn-lg" onclick="reject(this)" id="<%=app.email%>">Reject</a>
+    <%}%>
     </div>
    
 </div>

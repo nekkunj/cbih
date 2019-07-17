@@ -45,11 +45,11 @@ $('.container').append(`  <div class="row my-4 col-md-6">
         var filesize = ((files[0].size/1024)/1024).toFixed(4);
       if(filesize>1){
         $('#photowarning').append(`*The size of photo cannot be greater than 1 Mb`)
-        $('#photoupload').css('display','none')
+        $('#photoupload').attr("disabled", true);
 
       }
       else{
-        $('#photoupload').css('display','block')
+        $('#photoupload').attr("disabled", false);
       }
 
     })
@@ -60,11 +60,11 @@ $('.container').append(`  <div class="row my-4 col-md-6">
         var filesize = ((files[0].size/1024)/1024).toFixed(4);
       if(filesize>1){
         $('#idcardwarning').append(`*The size of photo cannot be greater than 1 Mb`)
-        $('#idcardupload').css('display','none')
+        $('#idcardupload').attr("disabled", true);
 
       }
       else{
-        $('#idcardupload').css('display','block')
+        $('#idcardupload').attr("disabled", false);
       }
 
     })
@@ -75,11 +75,11 @@ $('.container').append(`  <div class="row my-4 col-md-6">
         var filesize = ((files[0].size/1024)/1024).toFixed(4);
       if(filesize>5){
         $('#hospitalwarning').append(`*The size of photo cannot be greater than 1 Mb`)
-        $('#hospitalupload').css('display','none')
+        $('#hospitalupload').attr("disabled", true);
 
       }
       else{
-        $('#hospitalupload').css('display','block')
+        $('#hospitalupload').attr("disabled", false);
       }
 
     })
