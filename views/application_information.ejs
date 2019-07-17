@@ -254,12 +254,12 @@
     </div>
     <div class="col-md-6" style="align-items: center">
         <%if(app.status==='Application Accepted'){%>
-            <a class="btn btn-dark btn-lg text-light"  id="<%=app.email%>" > Accept</a>
+            <a class="btn btn-dark btn-lg text-light"   > Accept</a>
         <%}else{%>
     <a class="btn btn-success btn-lg" onclick="allow(this)" id="<%=app.email%>"> Accept</a>
     <%}%>
     <%if(app.status==='Rejected'){%>
-    <a class="btn btn-warning btn-lg" onclick="reject(this)" id="<%=app.email%>" aria-disabled="true">Reject</a>
+    <a class="btn btn-dark text-light btn-lg" >Reject</a>
     <%}else{%>
     <a class="btn btn-warning btn-lg" onclick="reject(this)" id="<%=app.email%>">Reject</a>
     <%}%>

@@ -282,10 +282,21 @@
                       <p>No files to show</p>
                       <% } %>
                  </div>
+              <%if(user_doc && user_doc[0].document_status!="In Progress"){%>
                  <div class="col-md-6 ml-auto" style="align-items: center" >
+                        <%if(user_doc[0].document_status==='Document Accepted'  ){%>
+                        <a class="btn btn-lg btn-dark text-light"> Allow</a>
+                            
+                        <%}else{%>
                         <a class="btn btn-lg btn-success" onclick="allowdocument(this)" id="<%=app.email%>"> Allow</a>
+<%}%>
+                        <%if(user_doc[0].document_status==='Rejected'){%>
+                            <a class="btn btn-dark btn-lg text-light" >Reject</a>
+<%}else{%>                        
                         <a class="btn btn-warning btn-lg" onclick="rejectdocument(this)" id="<%=app.email%>">Reject</a>
-                        </div>
+          <%}%>
+                    </div>
+                <%}%>    
 </div>
 <br><br>
 

@@ -70,12 +70,10 @@ const storage = new GridFsStorage({
            res.redirect('en/online_application')
          }
          else if(rop && rop.status==='Application Accepted'){
-          user_document_relation.findOne({email:req.user.email})
-          .then(one=>{
-            if(one && one.document_status!='In Progress' ){
-          res.redirect('/dashboard')
-            }
-            else{
+         
+          
+
+            
               gfs.files.find().toArray((err, files) => {
                  
                 // Check if files
@@ -108,9 +106,9 @@ const storage = new GridFsStorage({
                   
                 }
               });
-            }
-          })
-          .catch(err=>{console.log(err)})
+            
+          
+          
             
          }
          else{
@@ -315,6 +313,10 @@ user_document_relation.find({email:req.params.email})
   })
   .catch(err=>{console.log(err)})  
   })
+  
+  
+  
+  
   app.get('/refill_applicationform/:email',isLoggedIn,(req,res)=>{
 application.deleteOne({email:req.params.email})
 .then(suc=>{

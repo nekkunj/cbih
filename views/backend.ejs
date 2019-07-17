@@ -138,7 +138,52 @@
     </div>
     <div id="menu2" class="container tab-pane fade"><br>
       <h3>final</h3>
+      <div class="conatiner" style="display: flex;flex-wrap:wrap">
+          <%e=app.length%>
+          <%f=doc.length%>
+          
+           <%for(var i=0;i<e;i++){  %>
+               <% var flag=0%>
+             <% if(app[i].status==='Application Accepted'){%>
+               <% for(var j=0;j<f;j++){%>
+                 <% if(doc[j].document_status==='Document Accepted'){%>        
+                   <%if(flag==0 && doc[j].email==app[i].email){%>
+                    <%flag=1%>
+             <div class="card" style="width: 20rem;margin:1%">
+                 <div class="card-body">
+                   <h5 class="card-title " style="text-align:center;font-weight:bolder"><a href="/forwardpage/<%=app[i].email%>"><%=app[i].name%> <%=app[i].surname%></a></h5><br>
+                  <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Email:</label>&nbsp; <%=app[i].email%> </span>
+                  <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Phone number:</label>&nbsp; <%=app[i].phone%> </span>
+                  <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Complaint type:</label>&nbsp; 
+                   <%if(app[i].complaint_nature==1){%>
+                     Hip Replacement
+                     <%} else if(app[i].complaint_nature==2){%>
+                     Cataracts
+                     <%} else if(app[i].complaint_nature==3){%>
+                     Knee Replacement
+                     <%} else{%>
+                         Others
      
+                     <%}%>
+                 </span>
+                 <br>
+                 <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Address:</label>&nbsp; <%=app[i].address%> </span>
+     
+     
+     <br>
+     <br>  
+                   <a href="/forwardpage/<%=app[i].email%>" class="btn btn-primary" >Full details</a>
+                   <a onclick="allow(this)" id="<%=app[i].email%>" class="btn btn-success" style="float:right">Allow</a>
+     
+                 </div>
+                 <div class="card-footer text-muted">
+                    Applied  on <%app[i].current_date%>
+                   </div>
+               </div>
+          
+             <br>
+           <%}}}}}%>
+           </div>
     </div>
   </div>
 </div>
