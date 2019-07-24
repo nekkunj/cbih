@@ -44,7 +44,11 @@ function resethash(){
     margin-right:20px; 
     padding-bottom: 10px;
 }
-
+@media screen and (min-width: 800px) {
+  .media-dependent {
+    margin-left:25%;
+  }
+}
 #logo{
     display: block;
     float: left;
@@ -100,13 +104,13 @@ function resethash(){
 
 <div class="container emp-profile">
             <form method="post">
-                <div class="row">
-                    <div class="col-md-4  " style="align-items:center">
+                <div class="row ">
+                    <div class="col-md-4   border-right border-dark" >
                         
-                    <div class="col-md-6 ">
+                    <div class="col-md-6 media-dependent" >
                         <div class="profile-head">
                                     <h5>
-                                      <%=user.fullname%>
+                                      <%=user.fullname.toUpperCase()%>
                                     </h5>
                                     
                                     
@@ -120,22 +124,23 @@ function resethash(){
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <br><br>
+                    <div class="col-md-2 media-dependent" >
                         
                         
-                        <a  class="btn btn-light my-2" href="/logout" name="btnAddMore" value="Logout">Logout</a>
+                        <a  class="btn btn-success my-2" href="/logout" name="btnAddMore" value="Logout">Logout</a>
 
                     </div>
                 </div>
-                <div class="row pl-4">
+                <!-- <div class="row pl-4">
                    
-                    </div>
-                    <div class="col-md-8 border border-dark">
+                    </div> -->
+                    <div class="col-md-8 ">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Aplication Id</label>
+                                                <label>Application Id</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p><%= app.id %></p>
