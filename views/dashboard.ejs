@@ -101,23 +101,16 @@ function resethash(){
 <div class="container emp-profile">
             <form method="post">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4  " style="align-items:center">
+                        
+                    <div class="col-md-6 ">
                         <div class="profile-head">
                                     <h5>
                                       <%=user.fullname%>
                                     </h5>
                                     
                                     
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <ul class="nav nav-tabs " id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"  role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
@@ -128,28 +121,16 @@ function resethash(){
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        
                         
                         <a  class="btn btn-light my-2" href="/logout" name="btnAddMore" value="Logout">Logout</a>
 
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                            <p>WORK LINK</p>
-                            <a href="">Website Link</a><br/>
-                            <a href="">Bootsnipp Profile</a><br/>
-                            <a href="">Bootply Profile</a>
-                            <p>SKILLS</p>
-                            <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/>
-                        </div>
+                <div class="row pl-4">
+                   
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8 border border-dark">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
@@ -197,7 +178,13 @@ function resethash(){
                                                 <label>Gender</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><%= user.gender%></p>
+                                                <%if(user.gender==='m'){%>
+                                                <p>Male</p>
+                                                <%} else if(user.gender==='f'){%>
+                                                    <p>Female</p>
+                                                <%} else{%>
+                                                <p>Others</p>
+                                                <%}%>
                                             </div>
                                         </div>
                                         <div class="row">

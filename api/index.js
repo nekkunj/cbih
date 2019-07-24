@@ -26,7 +26,7 @@ app.post('/login',
    failureRedirect: '/login',
    failureFlash:true
   }),function(req,res){
-  console.log(req.user.email)
+  
   }
   
 
@@ -216,7 +216,7 @@ else{
    );
    app.get('/en/online_application',isLoggedIn,(req,res)=>{
       application.findOne({email:req.user.email})
-      .then(us=>{
+      .then((us)=>{
          if(us){
             
             res.redirect('/dashboard')
@@ -393,7 +393,7 @@ users.findOne({email:req.params.email})
          if(req.user.type==='server'){
             res.redirect('/backend')
          }
-       return next(); 
+       else{return next(); }
       }
       else{
       res.redirect('/login');
@@ -404,8 +404,11 @@ users.findOne({email:req.params.email})
 
        return next(); 
       }
+      else if(req.isAuthenticated() && req.user.type==='server'){
+      res.redirect('/backend');
+      }
       else{
-      res.redirect('/dashboard');
+         res.redirect('/dashboard');
       }
      }
      function isAdmin(req, res, next){
