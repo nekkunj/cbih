@@ -15,7 +15,23 @@
       Email:em
     })
   }
- 
+  function reject(abc){
+            $.post('/reject',{
+                Email:$(abc).attr('id')
+            })
+        }
+        function allowdocument(abc){
+          var em=$(abc).attr('id')
+          $.post('/allow/document',{
+            Email:em
+          })
+        }
+        function rejectdocument(abc){
+            var em=$(abc).attr('id')
+          $.post('/reject/document',{
+            Email:em
+          })
+        }
   </script>
 </head>
 <body>
@@ -33,15 +49,23 @@
   <nav>
   <ul class="nav nav-tabs bg-light" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#home">Verify</a>
+      <a class="nav-link active" data-toggle="tab" href="#home">Application Verification</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu1">Documents</a>
+        <a class="nav-link " data-toggle="tab" href="#menu5">Accepted Applications</a>
+      </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Documents verification</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu2">Final records</a>
+      <a class="nav-link" data-toggle="tab" href="#menu2">Accepted records</a>
     </li>
-   
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu3">Rejected Applications</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#menu4">Rejected Documents</a>
+        </li>
   </ul>
 </nav>
 </header>
@@ -76,11 +100,11 @@
 <br>
 <br>  
               <a href='/showapplication/<%=app[i].email%>'  class="btn btn-primary" >Full details</a>
-              <a onclick="allow(this)" id="<%=app[i].email%>" class="btn btn-success" style="float:right">Allow</a>
+              <a onclick="allow(this)" id="<%=app[i].email%>" href="/backend" class="btn btn-success" style="float:right">Allow</a>
 
             </div>
             <div class="card-footer text-muted">
-               Applied  on <%app[i].current_date%>
+               Applied  on  <%=app[i].current_date_of_application.getDate()%> - <%=app[i].current_date_of_application.getMonth()%> - <%=app[i].current_date_of_application.getFullYear()%>  at   <%=app[i].current_date_of_application.getHours()%>:<%=app[i].current_date_of_application.getMinutes()%>:<%=app[i].current_date_of_application.getSeconds()%>
               </div>
           </div>
      
@@ -89,7 +113,7 @@
       </div>
     </div>
     <div id="menu1" class="container tab-pane fade"><br>
-      <h3>documentation</h3>
+      <h3>Documents Verification</h3>
       
       <div class="conatiner" style="display: flex;flex-wrap:wrap">
      <%e=app.length%>
@@ -126,11 +150,11 @@
 <br>
 <br>  
               <a href="/forwardpage/<%=app[i].email%>" class="btn btn-primary" >Full details</a>
-              <a onclick="allow(this)" id="<%=app[i].email%>" class="btn btn-success" style="float:right">Allow</a>
+              <a onclick="allowdocument(this)" id="<%=app[i].email%>" href="/backend" class="btn btn-success" style="float:right">Allow</a>
 
             </div>
             <div class="card-footer text-muted">
-               Applied  on <%=app[i].current_date%>
+               Applied  on  <%=doc[j].current_date_of_documents.getDate()%> - <%=doc[j].current_date_of_documents.getMonth()%> - <%=doc[j].current_date_of_documents.getFullYear()%>  at   <%=doc[j].current_date_of_documents.getHours()%>:<%=doc[j].current_date_of_documents.getMinutes()%>:<%=doc[j].current_date_of_documents.getSeconds()%>
               </div>
           </div>
      
@@ -138,8 +162,56 @@
       <%}}}}}%>
       </div>
     </div>
+    <div id="menu5" class="container tab-pane fade"><br>
+      <h3>Accepted Applications</h3>
+      <div class="conatiner" style="display: flex;flex-wrap:wrap">
+     <%e=app.length%>
+     <%f=doc.length%>
+      <%for(var i=0;i<e;i++){  %>
+        <% if(app[i].status==='Application Accepted'){%>
+          <%var flag=0%>
+          <% for(var j=0;j<f;j++){%>
+              <%if(flag==0 && doc[j].email==app[i].email){%>
+                <%flag=1%>
+                <%}}%>
+                <%if(flag==0){%>
+        <div class="card" style="width: 20rem;margin:1%">
+            <div class="card-body">
+              <h5 class="card-title "   style="text-align:center;font-weight:bolder"><a href="/showapplication/<%=app[i].email%>"><%=app[i].name%> <%=app[i].surname%></a></h5><br>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Email:</label>&nbsp; <%=app[i].email%> </span>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Phone number:</label>&nbsp; <%=app[i].phone%> </span>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Complaint type:</label>&nbsp; 
+              <%if(app[i].complaint_nature==1){%>
+                Hip Replacement
+                <%} else if(app[i].complaint_nature==2){%>
+                Cataracts
+                <%} else if(app[i].complaint_nature==3){%>
+                Knee Replacement
+                <%} else{%>
+                    Others
+
+                <%}%>
+            </span>
+            <br>
+            <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Address:</label>&nbsp; <%=app[i].address%> </span>
+
+<br>
+<br>  
+              <a href='/showapplication/<%=app[i].email%>'  class="btn btn-primary" >Full details</a>
+              <a onclick="reject(this)" id="<%=app[i].email%>" href="/backend" class="btn btn-success" style="float:right">Reject</a>
+
+            </div>
+            <div class="card-footer text-muted">
+               Applied  on  <%=app[i].current_date_of_application.getDate()%> - <%=app[i].current_date_of_application.getMonth()%> - <%=app[i].current_date_of_application.getFullYear()%>  at   <%=app[i].current_date_of_application.getHours()%>:<%=app[i].current_date_of_application.getMinutes()%>:<%=app[i].current_date_of_application.getSeconds()%>
+              </div>
+          </div>
+     
+        <br>
+      <%}}}%>
+      </div>
+    </div>
     <div id="menu2" class="container tab-pane fade"><br>
-      <h3>final</h3>
+      <h3>Accepted Records</h3>
       <div class="conatiner" style="display: flex;flex-wrap:wrap">
           <%e=app.length%>
           <%f=doc.length%>
@@ -175,17 +247,108 @@
      <br>
      <br>  
                    <a href="/forwardpage/<%=app[i].email%>" class="btn btn-primary" >Full details</a>
-                   <a onclick="allow(this)" id="<%=app[i].email%>" class="btn btn-success" style="float:right">Allow</a>
+                   <a onclick="rejectdocument(this)" id="<%=app[i].email%>" href="/backend" class="btn btn-success" style="float:right">Reject</a>
      
                  </div>
                  <div class="card-footer text-muted">
-                    Applied  on <%app[i].current_date%>
+                    Applied  on <%=doc[j].current_date_of_documents.getDate()%> - <%=doc[j].current_date_of_documents.getMonth()%> - <%=doc[j].current_date_of_documents.getFullYear()%>     at   <%=doc[j].current_date_of_documents.getHours()%>:<%=doc[j].current_date_of_documents.getMinutes()%>:<%=doc[j].current_date_of_documents.getSeconds()%>
                    </div>
                </div>
           
              <br>
            <%}}}}}%>
            </div>
+    </div>
+    <div id="menu3" class="container tab-pane fade"><br>
+      <h3>Rejected Applications</h3>
+      <div class="conatiner" style="display: flex;flex-wrap:wrap">
+     <%e=app.length%>
+      <%for(var i=0;i<e;i++){  %>
+        <% if(app[i].status==='Rejected'){%>
+        <div class="card" style="width: 20rem;margin:1%">
+            <div class="card-body">
+              <h5 class="card-title "   style="text-align:center;font-weight:bolder"><a href="/showapplication/<%=app[i].email%>"><%=app[i].name%> <%=app[i].surname%></a></h5><br>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Email:</label>&nbsp; <%=app[i].email%> </span>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Phone number:</label>&nbsp; <%=app[i].phone%> </span>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Complaint type:</label>&nbsp; 
+              <%if(app[i].complaint_nature==1){%>
+                Hip Replacement
+                <%} else if(app[i].complaint_nature==2){%>
+                Cataracts
+                <%} else if(app[i].complaint_nature==3){%>
+                Knee Replacement
+                <%} else{%>
+                    Others
+
+                <%}%>
+            </span>
+            <br>
+            <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Address:</label>&nbsp; <%=app[i].address%> </span>
+
+<br>
+<br>  
+              <a href='/showapplication/<%=app[i].email%>'  class="btn btn-primary" >Full details</a>
+              <a onclick="allow(this)" id="<%=app[i].email%>" href="/backend" class="btn btn-success" style="float:right">Allow</a>
+
+            </div>
+            <div class="card-footer text-muted">
+               Applied  on  <%=app[i].current_date_of_application.getDate()%> - <%=app[i].current_date_of_application.getMonth()%> - <%=app[i].current_date_of_application.getFullYear()%> at   <%=app[i].current_date_of_application.getHours()%>:<%=app[i].current_date_of_application.getMinutes()%>:<%=app[i].current_date_of_application.getSeconds()%>
+              </div>
+          </div>
+     
+        <br>
+      <%}}%>
+      </div>
+    </div>
+    <div id="menu4" class="container tab-pane fade"><br>
+      <h3>documentation</h3>
+      
+      <div class="conatiner" style="display: flex;flex-wrap:wrap">
+     <%e=app.length%>
+     <%f=doc.length%>
+     
+      <%for(var i=0;i<e;i++){  %>
+          <% var flag=0%>
+        <% if(app[i].status==='Application Accepted'){%>
+          <% for(var j=0;j<f;j++){%>
+            <% if(doc[j].document_status==='Rejected'){%>        
+              <%if(flag==0 && doc[j].email==app[i].email){%>
+               <%flag=1%>
+        <div class="card" style="width: 20rem;margin:1%">
+            <div class="card-body">
+              <h5 class="card-title " style="text-align:center;font-weight:bolder"><a href="/forwardpage/<%=app[i].email%>"><%=app[i].name%> <%=app[i].surname%></a></h5><br>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Email:</label>&nbsp; <%=app[i].email%> </span>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Phone number:</label>&nbsp; <%=app[i].phone%> </span>
+             <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Complaint type:</label>&nbsp; 
+              <%if(app[i].complaint_nature==1){%>
+                Hip Replacement
+                <%} else if(app[i].complaint_nature==2){%>
+                Cataracts
+                <%} else if(app[i].complaint_nature==3){%>
+                Knee Replacement
+                <%} else{%>
+                    Others
+
+                <%}%>
+            </span>
+            <br>
+            <span class="card-text"> <label style="font-weight: bold;font-size: 18px" >Address:</label>&nbsp; <%=app[i].address%> </span>
+
+
+<br>
+<br>  
+              <a href="/forwardpage/<%=app[i].email%>" class="btn btn-primary" >Full details</a>
+              <a onclick="allowdocument(this)" id="<%=app[i].email%>" href="/backend" class="btn btn-success" style="float:right">Allow</a>
+
+            </div>
+            <div class="card-footer text-muted">
+               Applied  on <%=doc[j].current_date_of_documents.getDate()%> - <%=doc[j].current_date_of_documents.getMonth()%> - <%=doc[j].current_date_of_documents.getFullYear()%> at   <%=doc[j].current_date_of_documents.getHours()%>:<%=doc[j].current_date_of_documents.getMinutes()%>:<%=doc[j].current_date_of_documents.getSeconds()%>
+              </div>
+          </div>
+     
+        <br>
+      <%}}}}}%>
+      </div>
     </div>
   </div>
 </div>

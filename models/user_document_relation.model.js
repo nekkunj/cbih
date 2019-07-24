@@ -20,6 +20,10 @@ var userschema=new mongoose.Schema({
     },
     document_status:{
         type:String
+    },
+    current_date_of_documents:{
+        type:Date,
+        default:Date.now
     }     
     
 

@@ -55,7 +55,12 @@ var applicationschema=new mongoose.Schema({
     status:{
         type:String,
         default:"Under preview"
+    },
+    current_date_of_application:{
+        type:Date,
+        default:Date.now
     }
+    
         
     
 
