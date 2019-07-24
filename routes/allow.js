@@ -12,6 +12,7 @@ application.updateOne(myquery, newvalues, function(err, res) {
     if (err) throw err;
     console.log("1 document updated");
 })
+res.redirect('/backend')
   });
 
   route.post('/document',(req,res)=>{

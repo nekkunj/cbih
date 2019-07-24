@@ -254,14 +254,14 @@
     </div>
     <div class="col-md-6" style="align-items: center">
         <%if(app.status==='Application Accepted'){%>
-            <a class="btn btn-dark btn-lg text-light"   > Accept</a>
+            <a class="btn btn-dark btn-lg text-light" style="  pointer-events: none;cursor: default;"  > Accept</a>
         <%}else{%>
-    <a class="btn btn-success btn-lg" onclick="allow(this)" id="<%=app.email%>"> Accept</a>
+    <a class="btn btn-success btn-lg" href="/backend" onclick="allow(this)" id="<%=app.email%>"> Accept</a>
     <%}%>
     <%if(app.status==='Rejected'){%>
-    <a class="btn btn-dark text-light btn-lg" >Reject</a>
+    <a class="btn btn-dark text-light btn-lg" style="  pointer-events: none;cursor: default;" >Reject</a>
     <%}else{%>
-    <a class="btn btn-warning btn-lg" onclick="reject(this)" id="<%=app.email%>">Reject</a>
+    <a class="btn btn-warning btn-lg"  href="/backend" onclick="reject(this)" id="<%=app.email%>">Reject</a>
     <%}%>
     </div>
    

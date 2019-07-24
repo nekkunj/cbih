@@ -11,7 +11,9 @@ route.post('/',(req,res)=>{
 user.status='Rejected'
 user.save()
 .then((sv)=>{
-    res.redirect('/backend')
+    if(sv){
+        console.log('phunch rha hai')
+    res.redirect('/backend')}
 })
 .catch(err=>{console.log(err)})
 
@@ -27,7 +29,9 @@ user.save()
 user.document_status='Rejected'
 user.save()
 .then((sv)=>{
-    res.redirect('/backend')
+    if(sv){
+        console.log('phunch rha hai')
+    res.redirect('/backend')}
 })
 .catch(err=>{console.log(err)})
         }
