@@ -111,20 +111,22 @@ img {
 </header>
       <br>
     <div class="container   mb-4 p-2" style="background-color:white;border: solid 1px silver;border-radius: 2%">
+      <!-- doc1 -->
         <div class="row">
         <span class="col-md-6 mb-1" id="formone">
-            <h2 class="  my-4">Upload Photo</h2>
-       <form action="/documents/photo" method="post" enctype="multipart/form-data" > 
+            <h2 class="  my-4">Waiting list letter</h2>
+       <form action="/documents/waiting_list_letter" method="post" enctype="multipart/form-data" > 
         <div id="form1_div"></div>
        
         <div class="custom-file mb-3">
       
-    <input type="file" name="file" id="file" class="custom-file-input photoid" accept="image/x-png,image/gif,image/jpeg">
-    <div id="photowarning" style="color:red"></div>  
+    <input type="file" name="file" id="file" class="custom-file-input waiting_list_letter_id"  accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+    <!-- accept="image/x-png,image/gif,image/jpeg"> -->
+    <div id="waiting_list_letter_warning" style="color:red"></div>  
     <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
     
     </div>
-    <input type="submit" value="Upload" id="photoupload" class="btn btn-success btn-block">
+    <input type="submit" value="Upload" id="waiting_list_letter_upload" class="btn btn-success btn-block">
     </form>
     
   </span>
@@ -134,7 +136,7 @@ img {
     <% if(files && user_doc){ %>
         <% files.forEach(function(file) { %>
           <%user_doc.forEach(function(uc){%>
-            <%if(uc.filename===file.filename && uc.type_of_file==='photo'){%>
+            <%if(uc.filename===file.filename && uc.type_of_file==='waiting_list_letter'){%>
           <div class="card card-body " >
             <% if(file.isImage) { %>
               <img src="image/<%= file.filename %>" alt="">
@@ -152,20 +154,21 @@ img {
         </span>
     </div>
     <hr>
+    <!-- doc2 -->
 <div class="row">
   <span class="col-md-6 mb-1"  id="form2">
-    <h2 class="my-4">Upload identification Card</h2>
-    <form action="/documents/idcard" method="post" enctype="multipart/form-data">
+    <h2 class="my-4">Referral letter</h2>
+    <form action="/documents/referral_letter" method="post" enctype="multipart/form-data">
       <div id="form2_div"></div>
 
       <div class="custom-file mb-3">
         
-      <input type="file" name="file" id="file" class="custom-file-input idcardid" accept="image/x-png,image/gif,image/jpeg">
-    <div id="idcardwarning" style="color:red"></div>  
+      <input type="file" name="file" id="file" class="custom-file-input referral_letter_id"  accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+    <div id="referral_letter_warning" style="color:red"></div>  
 
       <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
       </div>
-      <input type="submit" value="Upload" id="idcardupload" class="btn btn-success btn-block">
+      <input type="submit" value="Upload" id="referral_letter_upload" class="btn btn-success btn-block">
       </form>
   </span>
   <span class="col-md-1"></span>
@@ -173,7 +176,7 @@ img {
       <% if(files && user_doc){ %>
         <% files.forEach(function(file) { %>
           <%user_doc.forEach(function(uc){%>
-            <%if(uc.filename===file.filename && uc.type_of_file==='idcard'){%>
+            <%if(uc.filename===file.filename && uc.type_of_file==='referral_letter'){%>
           <div class="card card-body mb-3">
             <% if(file.isImage) { %>
               <img src="image/<%= file.filename %>" alt="">
@@ -191,20 +194,21 @@ img {
   </span>
 </div>
 <hr>
+<!-- doc3 -->
 <div class="row">
     <spam class="col-md-6 mb-1" id="form3">
-      <h2 class="my-4">Upload hospital documents</h2>
-      <form action="/documents/hospital" method="post" enctype="multipart/form-data" >
+      <h2 class="my-4">HSE Proforma Invoice</h2>
+      <form action="/documents/hse_proforma_invoice" method="post" enctype="multipart/form-data" >
 
         <div id="form3_div"></div>
         <div class="custom-file mb-3">
           
-        <input type="file" name="file"  id="file" class="custom-file-input hospitalid" accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-    <div id="hospitalwarning" style="color:red"></div>  
+        <input type="file" name="file"  id="file" class="custom-file-input hse_proforma_invoice_id" accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+    <div id="hse_proforma_invoice_warning" style="color:red"></div>  
 
         <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
         </div>
-        <input type="submit" value="Upload" id="hospitalupload" class="btn btn-success btn-block" >
+        <input type="submit" value="Upload" id="hse_proforma_invoice_upload" class="btn btn-success btn-block" >
         </form>
     </spam>
   <span class="col-md-1"></span>
@@ -213,7 +217,7 @@ img {
         <% if(files && user_doc){ %>
           <% files.forEach(function(file) { %>
             <%user_doc.forEach(function(uc){%>
-              <%if(uc.filename===file.filename && uc.type_of_file==='hospital'){%>
+              <%if(uc.filename===file.filename && uc.type_of_file==='hse_proforma_invoice'){%>
             <div class="card card-body mb-3">
               <% if(file.isImage) { %>
                 <img src="image/<%= file.filename %>" alt="">
@@ -230,8 +234,210 @@ img {
                 <% } %>
     </span>
   </div>
+<hr>
+<!-- doc4 -->
+<div class="row">
+  <span class="col-md-6 mb-1"  id="form4">
+    <h2 class="my-4">HSE Prior Authorization (Only for Inpatients)</h2>
+    <form action="/documents/HSE_Prior_authorization" method="post" enctype="multipart/form-data">
+      <div id="form4_div"></div>
 
+      <div class="custom-file mb-3">
+        
+      <input type="file" name="file" id="file" class="custom-file-input HSE_Prior_authorization_id" >
+    <div id="HSE_Prior_authorizatio_warning" style="color:red"></div>  
 
-    
+      <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+      </div>
+      <input type="submit" value="Upload" id="HSE_Prior_authorization_upload" class="btn btn-success btn-block">
+      </form>
+  </span>
+  <span class="col-md-1"></span>
+  <span class="col-md-3 col-sm-6" >
+      <% if(files && user_doc){ %>
+        <% files.forEach(function(file) { %>
+          <%user_doc.forEach(function(uc){%>
+            <%if(uc.filename===file.filename && uc.type_of_file==='HSE_Prior_authorization'){%>
+          <div class="card card-body mb-3">
+            <% if(file.isImage) { %>
+              <img src="image/<%= file.filename %>" alt="">
+              <% } else { %>
+                <a href="files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                  <% } %>
+                    <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                      <button class="btn btn-danger btn-block mt-4">Delete</button>
+                    </form>
+          </div>
+          <%} })}) %>
+            <% } else { %>
+              <p>No files to show</p>
+              <% } %>
+  </span>
+</div>
+<hr>
+<!-- doc5 -->
+<div class="row">
+  <span class="col-md-6 mb-1"  id="form5">
+    <h2 class="my-4">Passports</h2>
+    <form action="/documents/Passports" method="post" enctype="multipart/form-data">
+      <div id="form5_div"></div>
+
+      <div class="custom-file mb-3">
+        
+      <input type="file" name="file" id="file" class="custom-file-input Passports_id" accept="image/x-png,image/gif,image/jpeg">
+    <div id="Passports_warning" style="color:red"></div>  
+
+      <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+      </div>
+      <input type="submit" value="Upload" id="Passports_upload" class="btn btn-success btn-block">
+      </form>
+  </span>
+  <span class="col-md-1"></span>
+  <span class="col-md-3 col-sm-6" >
+      <% if(files && user_doc){ %>
+        <% files.forEach(function(file) { %>
+          <%user_doc.forEach(function(uc){%>
+            <%if(uc.filename===file.filename && uc.type_of_file==='Passports'){%>
+          <div class="card card-body mb-3">
+            <% if(file.isImage) { %>
+              <img src="image/<%= file.filename %>" alt="">
+              <% } else { %>
+                <a href="files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                  <% } %>
+                    <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                      <button class="btn btn-danger btn-block mt-4">Delete</button>
+                    </form>
+          </div>
+          <%} })}) %>
+            <% } else { %>
+              <p>No files to show</p>
+              <% } %>
+  </span>
+</div>
+<hr>
+<!-- doc6 -->
+<div class="row">
+  <span class="col-md-6 mb-1"  id="form6">
+    <h2 class="my-4">Medical Cards</h2>
+    <form action="/documents/Medical_cards" method="post" enctype="multipart/form-data">
+      <div id="form6_div"></div>
+
+      <div class="custom-file mb-3">
+        
+      <input type="file" name="file" id="file" class="custom-file-input Medical_cards_id" >
+    <div id="Medical_cards_warning" style="color:red"></div>  
+
+      <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+      </div>
+      <input type="submit" value="Upload" id="Medical_cards_upload" class="btn btn-success btn-block">
+      </form>
+  </span>
+  <span class="col-md-1"></span>
+  <span class="col-md-3 col-sm-6" >
+      <% if(files && user_doc){ %>
+        <% files.forEach(function(file) { %>
+          <%user_doc.forEach(function(uc){%>
+            <%if(uc.filename===file.filename && uc.type_of_file==='Medical_cards'){%>
+          <div class="card card-body mb-3">
+            <% if(file.isImage) { %>
+              <img src="image/<%= file.filename %>" alt="">
+              <% } else { %>
+                <a href="files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                  <% } %>
+                    <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                      <button class="btn btn-danger btn-block mt-4">Delete</button>
+                    </form>
+          </div>
+          <%} })}) %>
+            <% } else { %>
+              <p>No files to show</p>
+              <% } %>
+  </span>
+</div> 
+<hr>
+<!-- doc7 -->
+<div class="row">
+  <span class="col-md-6 mb-1"  id="form7">
+    <h2 class="my-4">Medical Reports</h2>
+    <form action="/documents/Medical_Reports" method="post" enctype="multipart/form-data">
+      <div id="form7_div"></div>
+
+      <div class="custom-file mb-3">
+        
+      <input type="file" name="file" id="file" class="custom-file-input Medical_Reports_id"  accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+    <div id="Medical_Reports_warning" style="color:red"></div>  
+
+      <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+      </div>
+      <input type="submit" value="Upload" id="Medical_Reports_upload" class="btn btn-success btn-block">
+      </form>
+  </span>
+  <span class="col-md-1"></span>
+  <span class="col-md-3 col-sm-6" >
+      <% if(files && user_doc){ %>
+        <% files.forEach(function(file) { %>
+          <%user_doc.forEach(function(uc){%>
+            <%if(uc.filename===file.filename && uc.type_of_file==='Medical_Reports'){%>
+          <div class="card card-body mb-3">
+            <% if(file.isImage) { %>
+              <img src="image/<%= file.filename %>" alt="">
+              <% } else { %>
+                <a href="files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                  <% } %>
+                    <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                      <button class="btn btn-danger btn-block mt-4">Delete</button>
+                    </form>
+          </div>
+          <%} })}) %>
+            <% } else { %>
+              <p>No files to show</p>
+              <% } %>
+  </span>
+</div> 
+<hr>
+
+<!-- doc8 -->
+<div class="row">
+  <span class="col-md-6 mb-1"  id="form8">
+    <h2 class="my-4">Medical documents (blood tests, electrocardiograms, related docs to
+      treatment)</h2>
+    <form action="/documents/Medical_documents" method="post" enctype="multipart/form-data">
+      <div id="form8_div"></div>
+
+      <div class="custom-file mb-3">
+        
+      <input type="file" name="file" id="file" class="custom-file-input Medical_documents_id"  accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+    <div id="Medical_documents_warning" style="color:red"></div>  
+
+      <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+      </div>
+      <input type="submit" value="Upload" id="Medical_documents_upload" class="btn btn-success btn-block">
+      </form>
+  </span>
+  <span class="col-md-1"></span>
+  <span class="col-md-3 col-sm-6" >
+      <% if(files && user_doc){ %>
+        <% files.forEach(function(file) { %>
+          <%user_doc.forEach(function(uc){%>
+            <%if(uc.filename===file.filename && uc.type_of_file==='Medical_documents'){%>
+          <div class="card card-body mb-3">
+            <% if(file.isImage) { %>
+              <img src="image/<%= file.filename %>" alt="">
+              <% } else { %>
+                <a href="files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                  <% } %>
+                    <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                      <button class="btn btn-danger btn-block mt-4">Delete</button>
+                    </form>
+          </div>
+          <%} })}) %>
+            <% } else { %>
+              <p>No files to show</p>
+              <% } %>
+  </span>
+</div>
+
+<!-- doc9 -->
+
 </body>
 </html>

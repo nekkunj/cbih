@@ -147,22 +147,46 @@ const storage = new GridFsStorage({
 
 
 
-
-app.post('/documents/photo',documents.single('file'),(req,res)=>{
+// doc1
+app.post('/documents/waiting_list_letter',documents.single('file'),(req,res)=>{
 
 res.redirect('/upload_documents');
 })
-
-app.post('/documents/idcard',documents.single('file'),(req,res)=>{
+// doc2
+app.post('/documents/referral_letter',documents.single('file'),(req,res)=>{
  
 res.redirect('/upload_documents');
 })
-app.post('/documents/hospital',documents.single('file'),(req,res)=>{
+// doc3
+app.post('/documents/hse_proforma_invoice',documents.single('file'),(req,res)=>{
   
 res.redirect('/upload_documents');
 })
-
-
+// doc4
+app.post('/documents/HSE_Prior_authorization',documents.single('file'),(req,res)=>{
+  
+  res.redirect('/upload_documents');
+  })
+// doc5
+app.post('/documents/Passports',documents.single('file'),(req,res)=>{
+  
+  res.redirect('/upload_documents');
+  })
+  // doc6
+app.post('/documents/Medical_cards',documents.single('file'),(req,res)=>{
+  
+  res.redirect('/upload_documents');
+  })
+  // doc7
+app.post('/documents/Medical_Reports',documents.single('file'),(req,res)=>{
+  
+  res.redirect('/upload_documents');
+  })
+  // doc8
+app.post('/documents/Medical_documents',documents.single('file'),(req,res)=>{
+  
+  res.redirect('/upload_documents');
+  })
 app.get('/files',isAdmin, (req, res) => {
     gfs.files.find().toArray((err, files) => {
       // Check if files
