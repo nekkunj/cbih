@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Upload trip information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <br>
+    <div class="container">
+        <span>
+            <h2 style="display:inline">Welcome <%=user.fullname%></h2>
+            <a class="mr-0 btn btn-lg btn-warning" style="float:right"  href="/logout">Logout</a>
+          </span> 
+          <hr style="border:1px blue solid">
+
+
+          <div class="row">
+            <span class="col-md-6 mb-1"  id="form2">
+              <h2 class="my-4">Proforma Invoice</h2>
+              <form action="/backend/documents/reimbursement/Proforma_Invoice/<%=Email%>" method="post" enctype="multipart/form-data">
+                
+          
+                <div class="custom-file mb-3">
+                  
+                <input type="file" name="file" id="file" class="custom-file-input referral_letter_id"  accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+             
+          
+                <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+                </div>
+                <input type="submit" value="Upload" id="referral_letter_upload" class="btn btn-success btn-block">
+                </form>
+            </span>
+            <span class="col-md-1"></span>
+            <span class="col-md-3 col-sm-6" >
+                <% if(files && backend_doc){ %>
+                  <% files.forEach(function(file) { %>
+                    <%backend_doc.forEach(function(uc){%>
+                      <%if(uc.filename===file.filename && uc.document_type==='reimbursement' && uc.type_of_file==='Proforma_Invoice'){%>
+                    <div class="card card-body mb-3">
+                      <% if(file.isImage) { %>
+                        <img src="/backend/image/<%= file.filename %>" alt="">
+                        <% } else { %>
+                          <a href="/backend/files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                          
+                            <% } %>
+                              <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                                <button class="btn btn-danger btn-block mt-4">Delete</button>
+                              </form>
+                    </div>
+                    <%} })}) %>
+                      <% } else { %>
+                        <p>No files to show</p>
+                        <% } %>
+            </span>
+          </div>
+<hr>
+<div class="row">
+    <span class="col-md-6 mb-1"  id="form2">
+      <h2 class="my-4">Proof of Travel</h2>
+      <form action="/backend/documents/reimbursement/Proof_of_Travel/<%=Email%>" method="post" enctype="multipart/form-data">
+        
+  
+        <div class="custom-file mb-3">
+          
+        <input type="file" name="file" id="file" class="custom-file-input referral_letter_id"  accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+     
+  
+        <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+        </div>
+        <input type="submit" value="Upload" id="referral_letter_upload" class="btn btn-success btn-block">
+        </form>
+    </span>
+    <span class="col-md-1"></span>
+    <span class="col-md-3 col-sm-6" >
+        <% if(files && backend_doc){ %>
+          <% files.forEach(function(file) { %>
+            <%backend_doc.forEach(function(uc){%>
+              <%if(uc.filename===file.filename && uc.document_type==='reimbursement' && uc.type_of_file==='Proof_of_Travel'){%>
+            <div class="card card-body mb-3">
+              <% if(file.isImage) { %>
+                <img src="/backend/image/<%= file.filename %>" alt="">
+                <% } else { %>
+                  <a href="/backend/files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                    <% } %>
+                      <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                        <button class="btn btn-danger btn-block mt-4">Delete</button>
+                      </form>
+            </div>
+            <%} })}) %>
+              <% } else { %>
+                <p>No files to show</p>
+                <% } %>
+    </span>
+  </div>
+  <hr>
+  
+  <div class="row">
+    <span class="col-md-6 mb-1"  id="form2">
+      <h2 class="my-4">Wating list / Referral letter</h2>
+      <form action="/backend/documents/reimbursement/Wating_list_Referral_letter/<%=Email%>" method="post" enctype="multipart/form-data">
+        
+  
+        <div class="custom-file mb-3">
+          
+        <input type="file" name="file" id="file" class="custom-file-input referral_letter_id"  accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+     
+  
+        <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+        </div>
+        <input type="submit" value="Upload" id="referral_letter_upload" class="btn btn-success btn-block">
+        </form>
+    </span>
+    <span class="col-md-1"></span>
+    <span class="col-md-3 col-sm-6" >
+        <% if(files && backend_doc){ %>
+          <% files.forEach(function(file) { %>
+            <%backend_doc.forEach(function(uc){%>
+              <%if(uc.filename===file.filename && uc.document_type==='reimbursement' && uc.type_of_file==='Wating_list_Referral_letter'){%>
+            <div class="card card-body mb-3">
+              <% if(file.isImage) { %>
+                <img src="/backend/image/<%= file.filename %>" alt="">
+                <% } else { %>
+                  <a href="/backend/files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                    <% } %>
+                      <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                        <button class="btn btn-danger btn-block mt-4">Delete</button>
+                      </form>
+            </div>
+            <%} })}) %>
+              <% } else { %>
+                <p>No files to show</p>
+                <% } %>
+    </span>
+  </div>
+  <hr>
+
+  <div class="row">
+    <span class="col-md-6 mb-1"  id="form2">
+      <h2 class="my-4">Medical report / Preassessment</h2>
+      <form action="/backend/documents/reimbursement/Medical_report_Preassessment/<%=Email%>" method="post" enctype="multipart/form-data">
+        
+  
+        <div class="custom-file mb-3">
+          
+        <input type="file" name="file" id="file" class="custom-file-input referral_letter_id"  accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+     
+  
+        <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+        </div>
+        <input type="submit" value="Upload" id="referral_letter_upload" class="btn btn-success btn-block">
+        </form>
+    </span>
+    <span class="col-md-1"></span>
+    <span class="col-md-3 col-sm-6" >
+        <% if(files && backend_doc){ %>
+          <% files.forEach(function(file) { %>
+            <%backend_doc.forEach(function(uc){%>
+              <%if(uc.filename===file.filename && uc.document_type==='reimbursement' && uc.type_of_file==='Medical_report_Preassessment'){%>
+            <div class="card card-body mb-3">
+              <% if(file.isImage) { %>
+                <img src="/backend/image/<%= file.filename %>" alt="">
+                <% } else { %>
+                  <a href="/backend/files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                    <% } %>
+                      <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                        <button class="btn btn-danger btn-block mt-4">Delete</button>
+                      </form>
+            </div>
+            <%} })}) %>
+              <% } else { %>
+                <p>No files to show</p>
+                <% } %>
+    </span>
+  </div>
+  <hr>
+
+
+  <div class="row">
+    <span class="col-md-6 mb-1"  id="form2">
+      <h2 class="my-4">Invoice and receipt</h2>
+      <form action="/backend/documents/reimbursement/Invoice_and_receipt/<%=Email%>" method="post" enctype="multipart/form-data">
+        
+  
+        <div class="custom-file mb-3">
+          
+        <input type="file" name="file" id="file" class="custom-file-input referral_letter_id"  accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+     
+  
+        <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+        </div>
+        <input type="submit" value="Upload" id="referral_letter_upload" class="btn btn-success btn-block">
+        </form>
+    </span>
+    <span class="col-md-1"></span>
+    <span class="col-md-3 col-sm-6" >
+        <% if(files && backend_doc){ %>
+          <% files.forEach(function(file) { %>
+            <%backend_doc.forEach(function(uc){%>
+              <%if(uc.filename===file.filename && uc.document_type==='reimbursement' && uc.type_of_file==='Invoice_and_receipt'){%>
+            <div class="card card-body mb-3">
+              <% if(file.isImage) { %>
+                <img src="/backend/image/<%= file.filename %>" alt="">
+                <% } else { %>
+                  <a href="/backend/files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                    <% } %>
+                      <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                        <button class="btn btn-danger btn-block mt-4">Delete</button>
+                      </form>
+            </div>
+            <%} })}) %>
+              <% } else { %>
+                <p>No files to show</p>
+                <% } %>
+    </span>
+  </div>
+  <hr>
+ <a class="btn btn-danger center " href="/forwardpage/<%=Email%>">Submit</a>
+<br>
+<br>
+    </div>
+</body>
+</html>

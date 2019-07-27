@@ -56,7 +56,7 @@ require('./api/index.js')(app,passport);
 require('./models/documentsdb')(app,passport)
 require('./api/server_application_varifier.js')(app,passport)
 require('./routes/addapplication.js')(app);
-
+require('./models/serverdocument')(app,passport)
 // require('./api/documents.js')(app);
 
 

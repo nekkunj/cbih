@@ -282,6 +282,14 @@
                       <p>No files to show</p>
                       <% } %>
                  </div>
+
+
+<% if(user_doc && user_doc[0].document_status==="Document Accepted"){%>
+    <hr style="border:1px solid black">
+    <a href="/backend/trip/<%=app.email%>" class="btn btn-success m-2">Upload Trip Documents</a>
+    <a href="/backend/reimbursement/<%=app.email%>" class="btn btn-success m-2">Upload reimbursement Documents</a>
+    <hr style="border:1px solid black">
+    <%}%>
               <%if(user_doc && user_doc[0].document_status!="In Progress"){%>
                  <div class="col-md-6 ml-auto" style="align-items: center" >
                         <%if(user_doc[0].document_status==='Document Accepted'  ){%>

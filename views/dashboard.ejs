@@ -348,7 +348,28 @@ function resethash(){
                                                                 </div>
                                                         </div>
                                                 <%}%>
-
+                                                <%if(user_doc && user_doc.document_status==="Document Accepted"){%>
+                                                    <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>TRIP details</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                        <p><a href="/trip_details">Click here</a></p>
+                                                                   
+                                                                </div>
+                                                        </div>
+                                                <%}%>
+                                                <%if(user_doc && user_doc.document_status==="Document Accepted"){%>
+                                                    <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>REIMBURSEMENT details</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                        <p><a href="/REIMBURSEMENT_details">Click here</a></p>
+                                                                   
+                                                                </div>
+                                                        </div>
+                                                <%}%>
 
 
                                         </div>
