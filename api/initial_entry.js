@@ -6,7 +6,7 @@ const initial_form=mongoose.model('initialform')
 
 
 module.exports=function(app,passport){
-   app.get('/initial_form',(req,res)=>{
+   app.get('/initial_form',isnotloggedin,(req,res)=>{
        res.render('enter_form_details')
    })
     app.post('/initial_form',(req,res)=>{
@@ -174,7 +174,29 @@ function isAdmin(req, res, next){
    }
 
 
-
+function isLoggedIn(req, res, next){
+      if(req.isAuthenticated()){
+         if(req.user.type==='server'){
+            res.redirect('/backend')
+         }
+       else{return next(); }
+      }
+      else{
+      res.redirect('/login');
+      }
+     }
+     function isnotloggedin(req, res, next){
+        if(!req.isAuthenticated()){
+  
+         return next(); 
+        }
+        else if(req.isAuthenticated() && req.user.type==='server'){
+        res.redirect('/backend');
+        }
+        else{
+           res.redirect('/dashboard');
+        }
+       }
 
 
 }

@@ -51,7 +51,7 @@
                           <a href="/backend/files/<%= file.filename %>"><%=uc.originalfilename%></a>
                           
                             <% } %>
-                              <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                              <form method="POST" action="/backend/files/<%= file._id %>?_method=DELETE">
                                 <button class="btn btn-danger btn-block mt-4">Delete</button>
                               </form>
                     </div>
@@ -90,7 +90,7 @@
                 <% } else { %>
                   <a href="/backend/files/<%= file.filename %>"><%=uc.originalfilename%></a>
                     <% } %>
-                      <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                      <form method="POST" action="/backend/files/<%= file._id %>?_method=DELETE">
                         <button class="btn btn-danger btn-block mt-4">Delete</button>
                       </form>
             </div>

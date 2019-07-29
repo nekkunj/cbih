@@ -228,7 +228,20 @@ app.post('/backend/documents/reimbursement/Invoice_and_receipt/:email',documents
                                 });
                               });
                             
-                            
+                              app.post('/backend/files/:id',(req, res) => {
+                                    
+                                gfs.remove({ _id: req.params.id, root: 'tandrdocuments' }, (err, gridStore) => {
+                                  if (err) {
+                                    return res.status(404).json({ err: err });
+                                  }
+                              
+                                  // res.redirect('/backend');
+                                  
+  res.redirect('/backend');
+
+                                });
+                              });
+
                             // @route GET /image/:filename
                             // @desc Display Image
                             app.get('/backend/image/:filename',isLoggedIn, (req, res) => {
@@ -239,7 +252,8 @@ app.post('/backend/documents/reimbursement/Invoice_and_receipt/:email',documents
                                       err: 'No file exists'
                                     });
                                   }
-                              
+                                 
+
                             // Check if image
                             if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
                                 // Read output to browser
