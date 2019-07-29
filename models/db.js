@@ -9,4 +9,4 @@ require('./application.model')
 require('./user_document_relation.model')
 require('./forgot_links.model')
 require('./backend_document_relation.model')
-
+require('./initial_form.model')

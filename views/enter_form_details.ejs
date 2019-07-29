@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Initial form</title>
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel = "stylesheet"
+   type = "text/css"
+   href = "/form.css" />
+   <script>
+   function buttonclicked(){
+
+$('.container').animate({height:'toggle'})
+   }
+   function validateEmail(sEmail) {
+    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (filter.test(sEmail)==true) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+
+function checkform(myform){
+  var sEmail = $('#email').val();
+
+  $('#email_error').empty()
+  $('#phone_error').empty()
+  $('#agree_error').empty()
+  $('#age_error').empty()
+  $('#need_error').empty()
+
+
+
+if($("input[type='radio'][name='Irish']:checked").val()==undefined){
+alert('Please select all options')  
+  return false
+}
+if($("input[type='radio'][name='treatment']:checked").val()==undefined){
+  alert('Please select all options')
+  return false
+}
+if($("input[type='radio'][name='waiting_list']:checked").val()==undefined){
+  alert('Please select all options')
+  return false
+}
+
+  if( $('#age').val()==""){
+			$('#age_error').append('*please enter this field')
+			return false;
+    }
+
+    if( $('#need').val()==""){
+			$('#need_error').append('*please enter this field')
+			return false;
+    }
+  if( $('#email').val()=="" ){
+			$('#email_error').append('*please enter this field')
+			return false;
+    }
+    if( $('#phone').val()==""){
+			$('#phone_error').append('*please enter this field')
+			return false;
+		}
+if($("input[type='radio'][name='Irish']:checked").val()==='Yes'){
+  if($('#PPS_NUMBER').val()==''){
+    alert('Enter PPS NUMBER')
+    return false;
+  }
+}    
+    if ($.trim(sEmail).length == 0) {
+	
+	$('#email_error').append('*Please enter valid email address');
+	return false;
+}
+
+if (validateEmail(sEmail)==false) {
+	
+	$('#email_error').append('*Invalid Email Address');
+	return false;
+}
+
+
+var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+		 if(phoneno.test($('#phone').val())==false){
+			$('#phone_error').append('*Invalid phone number')
+		   console.log('incorrect phone number')
+			return false;
+     }
+     
+if($('#agree')[0].checked==false){
+  $('#agree_error').append('*Please agree this checkbox')
+
+  return false;
+}
+
+
+
+return true;
+}
+
+$(()=>{
+  
+ 
+  $("input[type='radio'][name='Irish']").change(function(){
+    if (this.value == 'Yes') {
+      $('#div_PPS_NUMBER').css('display','block')
+    }
+      else{
+      $('#div_PPS_NUMBER').css('display','none')
+    }    
+    
+  })
+
+
+//   $( "#age" ).keyup(function() {
+    
+//   alert( "Handler for .keyup() called." );
+// });
+
+// $("#myInput").on("input", function(){
+//         // Print entered value in a div box
+//         temp=$(this).val()
+//         n=temp.length
+//         $("#result").text(temp[n-1]);
+//     });
+
+
+
+})
+   
+   </script>
+
+
+</head>
+<body>
+
+<h1>"Are you Eligible to apply to the CBIH Programme ?"</h1>
+<button onclick="buttonclicked()" type="button">Check Here! </button>
+<br>
+<br>
+<% if(error_msg != ''){ %> 
+  <div  class="alert alert-danger" style="color:red"><%=error_msg%></div>
+  <%}%>  
+<div class="container" style="display:none">
+  <form action="/initial_form" method="POST" onsubmit="return checkform(this)">
+    <div class="row">
+      <div class="col-75">
+        <label for="medical card">*Do you have an Irish medical card ?(PPS Number) </label>
+        <br>
+        <input type="radio" name="Irish" value="Yes" > Yes, I do
+        <div class="col-25" id="div_PPS_NUMBER" style="display:none"><label for="PPS_NUMBER">ENTER PPS NUMBER</label><input type="text" name="PPS_NUMBER" id="PPS_NUMBER"></div>
+        <br>
+
+        <input type="radio" name="Irish" value="No, I don't">No, I don't<br>
+      </div>
+      
+    </div>
+    <div class="row">
+            <div class="col-75">
+              <label for="waiting list">*Are you on HSE waiting list? </label>
+              <br>
+              <input type="radio" name="waiting_list" value="Yes, I do"> Yes, I am<br>
+              <input type="radio" name="waiting_list" value="No, I don't">No, I will need to provide a referral letter from my GP<br>
+            </div>
+            
+          </div>
+          <div class="row">
+                <div class="col-75">
+                  <label for="treatment">*The treatment you require is </label>
+                  <br>
+                  <input type="radio" name="treatment" value="Inpatient"> Inpatient<br>
+                  <input type="radio" name="treatment" value="Outpatient">Outpatient<br>
+                </div>
+                
+              </div>
+              <div class="row">
+                    <div class="col-25">
+                      <label for="age">*How Old are You?</label>
+      <div id="age_error" class="" style="color:red"></div>
+                      <div class="col-75">
+                              <input type="text" style=" box-sizing: border-box;padding:5px 5px" id="age" name="age" placeholder="age">
+                            </div>
+                    </div>
+    <div class="row"></div>
+      <div class="col-25">
+        <label for="need">*Please, specify the treatment you need </label>
+      </div>
+      
+      <div class="col-75">
+      <div id="need_error" class="" style="color:red"></div>
+       
+            <textarea id="need" name="subject"  placeholder="Write something.." style="height:200px"></textarea>
+      </div>
+    </div>
+    <div class="row col-25" >
+      
+      <label for="email">*Email</label>
+      <div id="email_error" class="" style="color:red"></div>
+      <input type="text" id="email" name="email" placeholder="email">
+    </div>
+    <div class="row col-25">
+      <label for="phone">*Mobile number</label>
+      <div id="phone_error" class="" style="color:red"></div>
+      <input type="text" id="phone" name="phone" placeholder="PHONE NUMBER">
+    </div>
+    <div class="row">
+        <div id="agree_error" class="" style="color:red"></div>
+
+      <input type="checkbox" id="agree">
+<label for="agree">I allow CBIH to contact me for further information</label>
+    </div>
+   
+     
+     
+   
+    <div class="row">
+            <div class="col-75">
+      <input type="submit" value="Submit">
+    </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

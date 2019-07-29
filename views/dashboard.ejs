@@ -311,7 +311,7 @@ function resethash(){
                                                 
                                         <%}%>
                                         <%if(app.status==="Application Accepted"){%>
-                                            <%if((user_doc && user_doc.document_status!="Rejected") || !user_doc){%>
+                                            <%if((user_doc && user_doc.document_status!="Rejected" && user_doc.document_status!="Document Accepted")  || !user_doc){%>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                         <%if(user_doc && user_doc.document_status!="In Progress" ){%>
@@ -348,24 +348,14 @@ function resethash(){
                                                                 </div>
                                                         </div>
                                                 <%}%>
-                                                <%if(user_doc && user_doc.document_status==="Document Accepted"){%>
-                                                    <div class="row">
-                                                            <div class="col-md-6">
-                                                                <label>TRIP details</label>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                        <p><a href="/trip_details">Click here</a></p>
-                                                                   
-                                                                </div>
-                                                        </div>
-                                                <%}%>
+                                                
                                                 <%if(user_doc && user_doc.document_status==="Document Accepted"){%>
                                                     <div class="row">
                                                             <div class="col-md-6">
                                                                 <label>REIMBURSEMENT details</label>
                                                             </div>
                                                             <div class="col-md-6">
-                                                        <p><a href="/REIMBURSEMENT_details">Click here</a></p>
+                                                        <p><a href="/trip_reimbursement_details">Click here</a></p>
                                                                    
                                                                 </div>
                                                         </div>

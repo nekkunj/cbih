@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>REIMBURSEMENT INFORMATION</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+        .navlinks{
+            color:red;
+          
+            
+            font-size: 20px;   
+        }
+        .navitems:hover{
+            border-bottom: red solid 1px;
+        }
+        .navitems{
+            margin-right:20px; 
+            padding-bottom: 10px;
+        }
+        @media screen and (min-width: 800px) {
+          .media-dependent {
+            margin-left:25%;
+          }
+        }
+        #logo{
+            display: block;
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin: 5px 0;
+            margin-right:50px;
+        }</style>
+</head>
+<body>
+        <header class="container" style="background: rgba(255, 255, 255, 0.8);">  
+           
+                
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <a class="navbar-brand" id="logo" href="/"><img src="https://cbih.org/assets/img/cbih.png" alt="Cross Border Irish Health Programme | CBIH" title="Cross Border Irish Health Programme | CBIH">
+                        
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                      
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                                        <li class="nav-item navitems active">
+                                          <a class="nav-link navlinks" href="/" style="color:red">Home <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item navitems ">
+                                          <a class="nav-link navlinks" href="/en/cross_border_health" style="color:red">Services</a>
+                                        </li>
+                                        <li class="nav-item navitems ">
+                                          <a class="nav-link navlinks" href="/en/application" style="color:red">How to Apply</a>
+                                        </li>
+                                        <li class="nav-item navitems ">
+                                                <a class="nav-link navlinks" href="/en/about_us" style="color:red">About Us</a>
+                                              </li>
+                                              <li class="nav-item navitems ">
+                                                    <a class="nav-link navlinks" href="/en/faqs" style="color:red">Faqs</a>
+                                                  </li>
+                                                  <li class="nav-item navitems ">
+                                                        <a class="nav-link navlinks" href="/en/contact_us" style="color:red">Contacts</a>
+                                                      </li>
+                
+                                                      <li class="nav-item" id='but'>
+                                                            <a class="btn btn-warning  my-2 my-sm-0" href="/logout">Logout</a>
+                                                          </li>
+                                                    
+                                      </ul>
+                          
+                        </div>
+                      </nav>
+           </header>
+           
+           
+<br><br>
+<div class="container col-md-6">
+  <header>
+    <nav>
+        <ul class="nav nav-tabs bg-light" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#tri">Trip Information</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " data-toggle="tab" href="#reimburse">Reimbursement</a>
+              </li>
+              </ul>
+     </nav>
+    </header>
+</div>
+<br><br>
+<div class="container-fluid tab-content">
+
+<div  id="tri" class=" container tab-pane active">
+
+    <h3>TRIP INFORMATION</h3>
+    Get ready for your upcoming trip!
+   <br><br>
+            <% if(files && backend_doc){ %>
+              <% files.forEach(function(file) { %>
+                <%backend_doc.forEach(function(uc){%>
+                  <%if(uc.filename===file.filename && uc.document_type==='trip' ){%>
+                <div class="card card-body mb-3 bg-light">
+                  <% if(file.isImage) { %>
+                    <img src="/backend/image/<%= file.filename %>" alt="">
+                    <% } else { %>
+                      <a href="/backend/files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                      
+                        <% } %>
+                         
+                </div>
+                <%} })}) %>
+                  <% } else { %>
+                    <p>No files to show</p>
+                    <% } %>
+        
+    </div>
+<div  id="reimburse" class=" container tab-pane fade">
+    <h3>REIMBURSEMENT INFORMATION</h3>
+    This is the documentation sent to the HSE on your behalf
+        <br>
+        <br>
+                <% if(files && backend_doc){ %>
+                  <% files.forEach(function(file) { %>
+                    <%backend_doc.forEach(function(uc){%>
+                      <%if(uc.filename===file.filename && uc.document_type==='reimbursement' ){%>
+                    <div class="card card-body mb-3 bg-light">
+                      <% if(file.isImage) { %>
+                        <img src="/backend/image/<%= file.filename %>" alt="">
+                        <% } else { %>
+                          <a href="/backend/files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                          
+                            <% } %>
+                             
+                    </div>
+                    <%} })}) %>
+                      <% } else { %>
+                        <p>No files to show</p>
+                        <% } %>
+            
+</div>
+
+            </div>
+</body>
+</html>

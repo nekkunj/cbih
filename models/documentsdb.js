@@ -33,11 +33,15 @@ const storage = new GridFsStorage({
           
           const filename = buf.toString('hex') + path.extname(file.originalname);
          user_document_one=new user_document_relation()
-        
+        if(a.length==3){
+          user_document_one.email=temp_email
+        }
+         else{
+          user_document_one.email=a[3]
+         }
+
+
          
-
-
-         user_document_one.email=temp_email
          user_document_one.filename=filename  
          user_document_one.originalfilename=file.originalname
          user_document_one.type_of_file=a[2]
@@ -67,7 +71,7 @@ const storage = new GridFsStorage({
         application.findOne({email:req.user.email})
        .then(rop=>{
          if(!rop){
-           res.redirect('en/online_application')
+           res.redirect('/en/online_application')
          }
          else if(rop && rop.status==='Application Accepted'){
          
@@ -187,6 +191,11 @@ app.post('/documents/Medical_documents',documents.single('file'),(req,res)=>{
   
   res.redirect('/upload_documents');
   })
+  //doc 9
+  app.post('/documents/payment_details/:email',documents.single('file'),(req,res)=>{
+  
+    res.redirect(`/showapplication/${req.params.email}`);
+    })
 app.get('/files',isAdmin, (req, res) => {
     gfs.files.find().toArray((err, files) => {
       // Check if files
@@ -280,12 +289,39 @@ user_document_relation.updateMany(myquery, newvalues, function(err, res) {
 res.redirect('/dashboard')
 })    
 app.get('/showapplication/:email',isAdmin,(req,res)=>{
+  var temp;
   application.findOne({email:req.params.email})
   .then(app=>{
       if(app){
-          res.render('application_information.ejs',{
-              app:app
-          })
+user_document_relation.find({email:req.params.email})
+.then(usdo=>{
+  gfs.files.find().toArray((err, files) => {
+       
+    // Check if files
+    
+    if (!files || files.length === 0) {
+      res.render('application_information.ejs', { files: false,app:app,user_doc:usdo });
+    } else {
+      files.map(file => {
+        if (
+          file.contentType === 'image/jpeg' ||
+          file.contentType === 'image/png'
+        ) {
+          file.isImage = true;
+        } else {
+          file.isImage = false;
+        }
+      });
+      res.render('application_information.ejs', { files: files,app:app,user_doc:usdo});
+    }
+  });
+})
+.catch(err=>{console.log(err)})
+      
+
+
+
+          
       }
       else{
           res.status(404).send('Page Not found');       
@@ -293,10 +329,12 @@ app.get('/showapplication/:email',isAdmin,(req,res)=>{
       }
   })
   .catch(err=>{console.log(err)})  
+
+   
   })
 
 app.get('/forwardpage/:email',isAdmin,(req,res)=>{
-  var temp;
+ var temp;
   application.findOne({email:req.params.email})
   .then(app=>{
       if(app){
@@ -337,7 +375,7 @@ user_document_relation.find({email:req.params.email})
   })
   .catch(err=>{console.log(err)})  
   })
-  
+   
   
   
   

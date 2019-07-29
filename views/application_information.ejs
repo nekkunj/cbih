@@ -252,6 +252,48 @@
                     
                 </div>
     </div>
+
+    <%if(app.status==='Application Accepted'){%>
+        <div class="row border border-dark">
+            <span class="col-md-6 mb-1"  id="form2">
+              <h2 class="my-4">Upload Payment Information</h2>
+              <form action="/documents/payment_details/<%=app.email%>" method="post" enctype="multipart/form-data">
+                
+          
+                <div class="custom-file mb-3">
+                  
+                <input type="file" name="file" id="file" class="custom-file-input referral_letter_id"  accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+             
+          
+                <label for="file" class="custom-file-label" data-browse="Browse" >Choose file</label>
+                </div>
+                <input type="submit" value="Upload" id="referral_letter_upload" class="btn btn-success btn-block">
+                </form>
+            </span>
+            <span class="col-md-1"></span>
+            <span class="col-md-3 col-sm-6" >
+                <% if(files && user_doc){ %>
+                  <% files.forEach(function(file) { %>
+                    <%user_doc.forEach(function(uc){%>
+                      <%if(uc.filename===file.filename  && uc.type_of_file==='payment_details'){%>
+                    <div class="card card-body mb-3">
+                      <% if(file.isImage) { %>
+                        <img src="/image/<%= file.filename %>" alt="">
+                        <% } else { %>
+                          <a href="/files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                            <% } %>
+                              <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                                <button class="btn btn-danger btn-block mt-4">Delete</button>
+                              </form>
+                    </div>
+                    <%} })}) %>
+                      <% } else { %>
+                        <p>No files uploaded</p>
+                        <% } %>
+            </span>
+          </div>
+          <br><br>
+<%}%>    
     <div class="col-md-6" style="align-items: center">
         <%if(app.status==='Application Accepted'){%>
             <a class="btn btn-dark btn-lg text-light" style="  pointer-events: none;cursor: default;"  > Accept</a>

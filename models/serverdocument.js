@@ -134,7 +134,40 @@ app.get('/backend/reimbursement/:email',isAdmin,(req,res)=>{
 })
 
 
-
+app.get('/trip_reimbursement_details',isLoggedIn,(req,res)=>{
+    gfs.files.find().toArray((err, files) => {
+                 
+        // Check if files
+        if (!files || files.length === 0) {
+          backend_document_relation.find({email:req.user.email})
+          .then(one=>{
+            if(one){
+              res.render('trip_reimbursement_information',{user:req.user,files:false,backend_doc:one});
+            }
+          })
+          .catch(err=>{console.log(err)})
+        } else {
+          files.map(file => {
+            if (
+              file.contentType === 'image/jpeg' ||
+              file.contentType === 'image/png'
+            ) {
+              file.isImage = true;
+            } else {
+              file.isImage = false;
+            }
+          });
+          backend_document_relation.find({email:req.user.email})
+          .then(one=>{
+            if(one){
+              res.render('trip_reimbursement_information',{user:req.user,files:files,backend_doc:one});
+            }
+          })
+          .catch(err=>{console.log(err)})
+          
+        }
+      });
+})
 
 // trip
 app.post('/backend/documents/trip/Hotel_confirmation/:email',documents.single('file'),(req,res)=>{

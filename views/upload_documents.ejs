@@ -438,6 +438,30 @@ img {
 </div>
 
 <!-- doc9 -->
-
+<div  class=" row ">
+<span class="col-md-6">
+  <hr>
+  <h3>PAYMENT INFORMATION</h3>
+  
+ <br><br>
+          <% if(files && user_doc){ %>
+            <% files.forEach(function(file) { %>
+              <%user_doc.forEach(function(uc){%>
+                <%if(uc.filename===file.filename && uc.type_of_file==='payment_details' ){%>
+              <div class="card card-body mb-3 bg-light">
+                <% if(file.isImage) { %>
+                  <img src="/image/<%= file.filename %>" alt="">
+                  <% } else { %>
+                    <a href="/files/<%= file.filename %>"><%=uc.originalfilename%></a>
+                    
+                      <% } %>
+                       
+              </div>
+              <%} })}) %>
+                <% } else { %>
+                  <p>No files to show</p>
+                  <% } %>
+</span>
+  </div>
 </body>
 </html>
