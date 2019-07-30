@@ -142,7 +142,7 @@ else{
    Token: <b>${secrettoken}</b>
    <br/>
    On the following page:
-   <a href="http://localhost:7007/verify">http://localhost:7007/verify</a>
+   <a href="https://cbih.herokuapp.com/verify">https://cbih.herokuapp.com/verify</a>
    <br/><br/>
    Have a pleasant day!
    <br/><br/>
@@ -316,7 +316,7 @@ Hi there,
 Reset your password
 <br/><br/>
 On the following page:
-<a href="http://localhost:7007/reset_password/${key}">http://localhost:7007/reset_password/${key}</a>
+<a href="https://cbih.herokuapp.com/reset_password/${key}">https://cbih.herokuapp.com/reset_password/${key}</a>
 <br/><br/>
 *It is a window for only one time
 <br>

@@ -77,7 +77,7 @@ initial_form.findOne({email:req.params.email})
              <br>
 If you would like to apply now, please create a personal area, it will only take 5 minutes
 <br>
-<a href="http://localhost:7007/sign_up">Apply now!</a>
+<a href="https://cbih.herokuapp.com/sign_up">Apply now!</a>
              `
              let mailOptions = {
                 // should be replaced with real recipient's account
@@ -128,7 +128,7 @@ app.get('/backend/reject/:email',isAdmin,function(req,res){
                  <br>
     If you would like to apply again, please fill the options correctly
     <br>
-    <a href="http://localhost:7007/initial_form">Apply now!</a>
+    <a href="https://cbih.herokuapp.com/initial_form">Apply now!</a>
                  `
                  let mailOptions = {
                     // should be replaced with real recipient's account
