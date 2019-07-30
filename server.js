@@ -82,8 +82,12 @@ app.use('/en/about_us',express.static(__dirname+"/public_static/about_us.html"))
  app.use('/reject',require('./routes/reject.js').route)
 
 //  app.use('/allow',require('./routes/change_document_status.js').route)
+var http = require('http').Server(app);
+http.listen(process.env.PORT || 3000, function(){
+    console.log('listening on', http.address().port);
+  });
+  
+// app.listen(7007,(err)=>{
 
-
-app.listen(7007,(err)=>{
-    console.log("Server Started at http://localhost:7007")
-})
+//     console.log("Server Started at http://localhost:7007")
+// })
