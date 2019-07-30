@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 const Grid = require('gridfs-stream');
-const mongoURI = 'mongodb://localhost:27017/backenddocuments';
+const mongoURI = require('../config/keys').mongoURI;
 const GridFsStorage = require('multer-gridfs-storage');
 const multer=require('multer')
 const crypto = require('crypto');

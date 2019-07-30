@@ -88,7 +88,7 @@ else{
    .then(fr=>{
       if(fr){
          console.log(fr.status)
-         if(fr.status==='acepted'){
+         if(fr.status==='accept'){
             users.findOne({email:req.body.Email})
             .then(User=>{
                if(User){
