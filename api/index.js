@@ -128,7 +128,7 @@ else{
       secure: true,
       auth: {
           // should be replaced with real sender's account
-          user: 'nekkunjpilani@gmail.com',
+          user: 'babyaggarwal1234@gmail.com',
           pass: 'nikunj24'
       }
    });
